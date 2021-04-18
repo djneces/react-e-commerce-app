@@ -1,0 +1,23 @@
+@import '../../assets/styles/colors';
+
+.SignInForm {
+    width: 40vw;
+    border: 1px solid $color-primary;
+    padding: 2rem;
+    margin: 3rem auto;
+
+    &__login {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            padding: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+    }
+}
