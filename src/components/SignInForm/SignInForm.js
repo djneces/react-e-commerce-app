@@ -21,14 +21,10 @@ const SignInForm = ({ loginCurrentUser, loading, history }) => {
     loginCurrentUser(formData, history);
     setFormData({ email: '', password: '' });
   };
-  console.log(loading);
 
   return (
     <div className='SignInForm'>
       <h1>Sign In</h1>
-      <div style={{ backgroundColor: 'red', height: '50px' }}>
-        <h1>{loading && 'Loading'}</h1>
-      </div>
       <p>Sign In Your Account</p>
       <div className='SignInForm__login'>
         <form onSubmit={(e) => onSubmit(e)}>

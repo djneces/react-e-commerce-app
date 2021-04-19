@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import SignInPage from './containers/SignInPage/SignInPage';
 import LandingPage from './containers/LandingPage/LandingPage';
+import Alert from './components/Alert/Alert';
 import { setCurrentUser, subscribeUser } from './store/actions/user';
 
 import './App.scss';
@@ -26,6 +27,7 @@ class App extends Component {
       <BrowserRouter>
         <div className='App'>
           <Header />
+          <Alert />
           <Switch>
             <Route exact path='/' component={LandingPage} />
             {/* redirects logged in user back to landing page if they try to access login */}

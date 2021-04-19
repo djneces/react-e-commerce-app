@@ -1,0 +1,23 @@
+@import '../../assets/styles/colors';
+
+.Alert {
+    padding: 0.8rem;
+    margin: 1rem 0;
+    opacity: 0.9;
+    background: $color-primary;
+    color: #fff;
+    border-radius: 3px;
+    position: absolute;
+    left: 3rem;
+    bottom: 2rem;
+
+    &.success {
+        background: $color-primary;
+        color: #fff;
+    }
+
+    &.danger {
+        background: rgb(87, 14, 14);
+        color: #fff;
+    }
+}

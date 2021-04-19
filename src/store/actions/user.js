@@ -9,6 +9,7 @@ import {
   auth,
   createUserProfileDocument,
 } from '../../firebase/firebaseUtils.js';
+import { setAlert } from './alert';
 
 //SUBSCRIBE USER
 export const subscribeUser = () => async (dispatch) => {
@@ -51,13 +52,14 @@ export const loginCurrentUser = (user, history) => async (dispatch) => {
     dispatch({
       type: LOGIN_CURRENT_USER,
     });
-
+    dispatch(setAlert('You are logged in successfully', 'success'));
     history.push('/');
   } catch (err) {
     console.error(err);
     dispatch({
       type: AUTH_ERROR,
     });
+    dispatch(setAlert('Wrong credentials, please try again', 'danger'));
   }
 };
 
@@ -74,16 +76,21 @@ export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
     dispatch({
       type: REGISTER_CURRENT_USER,
     });
+    dispatch(setAlert('You have registered successfully', 'success'));
     history.push('/');
   } catch (err) {
     console.error(err);
     dispatch({
       type: AUTH_ERROR,
     });
+    dispatch(setAlert('Something went wrong, please try again', 'danger'));
   }
 };
 
 //LOGOUT USER
-export const logoutCurrentUser = () => ({
-  type: LOGOUT_CURRENT_USER,
-});
+export const logoutCurrentUser = () => async (dispatch) => {
+  dispatch({
+    type: LOGOUT_CURRENT_USER,
+  });
+  dispatch(setAlert('You have logged out successfully', 'success'));
+};

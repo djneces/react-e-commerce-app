@@ -4,5 +4,5 @@ import alertReducer from './alert';
 
 export default combineReducers({
   user: userReducer,
-  alert: alertReducer,
+  alerts: alertReducer,
 });

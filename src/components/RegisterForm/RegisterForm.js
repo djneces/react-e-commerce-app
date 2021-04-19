@@ -3,13 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './RegisterForm.scss';
 
-import {
-  createUserProfileDocument,
-  auth,
-} from '../../firebase/firebaseUtils.js';
 import { registerCurrentUser } from '../../store/actions/user';
 
-const RegisterForm = ({ history, registerCurrentUser }) => {
+const RegisterForm = ({ history, registerCurrentUser, setAlert }) => {
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
