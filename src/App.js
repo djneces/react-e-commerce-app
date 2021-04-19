@@ -1,68 +1,54 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.scss';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import SignInPage from './containers/SignInPage/SignInPage';
+import LandingPage from './containers/LandingPage/LandingPage';
+import { setCurrentUser, subscribeUser } from './store/actions/user';
 
-//Redux
-import { Provider } from 'react-redux';
-import store from './store/store';
-import { auth, createUserProfileDocument } from './firebase/firebaseUtils';
+import './App.scss';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentUser: null,
-    };
-  }
-
-  unsubscribeFromAuth = null;
-
   componentDidMount() {
-    //subscription
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        //storing user in the DB (Firestore)
-        const userRef = await createUserProfileDocument(userAuth);
-        //get Snapshot from the DB with an Id
-        userRef.onSnapshot((snapShot) => {
-          const { createdAt, email, displayName } = snapShot.data();
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              username: displayName,
-              email: email,
-              createdAt: createdAt.toDate(),
-            },
-          });
-        });
-      } else {
-        this.setState({ currentUser: null });
-      }
-    });
+    const { subscribeUser } = this.props;
+    subscribeUser();
   }
 
   //we need to close the subscription - avoid memory leaks
   componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    subscribeUser()();
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <div className='App'>
-            <Header currentUser={this.state.currentUser} />
-            <Switch>
-              <Route exact path='/login' component={SignInPage} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <div className='App'>
+          <Header />
+          <Switch>
+            <Route exact path='/' component={LandingPage} />
+            {/* redirects logged in user back to landing page if they try to access login */}
+            <Route
+              exact
+              path='/login'
+              render={() =>
+                currentUser ? <Redirect to='/' /> : <SignInPage />
+              }
+            />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+// });
+
+export default connect(mapStateToProps, { setCurrentUser, subscribeUser })(App);

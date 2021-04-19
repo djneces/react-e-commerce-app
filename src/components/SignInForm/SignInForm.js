@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './SignInForm.scss';
 
-import { auth, signInWithGoogle } from '../../firebase/firebaseUtils.js';
+import { loginCurrentUser } from '../../store/actions/user';
+import { signInWithGoogle } from '../../firebase/firebaseUtils.js';
 
-const SignInForm = () => {
+const SignInForm = ({ loginCurrentUser, loading, history }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,18 +18,17 @@ const SignInForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setFormData({ email: '', password: '' });
-    } catch (err) {
-      console.log(err);
-    }
+    loginCurrentUser(formData, history);
+    setFormData({ email: '', password: '' });
   };
+  console.log(loading);
 
   return (
     <div className='SignInForm'>
       <h1>Sign In</h1>
+      <div style={{ backgroundColor: 'red', height: '50px' }}>
+        <h1>{loading && 'Loading'}</h1>
+      </div>
       <p>Sign In Your Account</p>
       <div className='SignInForm__login'>
         <form onSubmit={(e) => onSubmit(e)}>
@@ -63,4 +65,10 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+const mapStateToProps = ({ user }) => ({
+  loading: user.loading,
+});
+
+export default withRouter(
+  connect(mapStateToProps, { loginCurrentUser })(SignInForm)
+);

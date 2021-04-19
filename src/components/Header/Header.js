@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.scss';
+import { connect } from 'react-redux';
+
 import SearchBar from '../SearchBar/SearchBar';
 import { auth } from '../../firebase/firebaseUtils';
+import { logoutCurrentUser } from '../../store/actions/user';
+import './Header.scss';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, logoutCurrentUser }) => {
+  const onSignOut = () => {
+    auth.signOut();
+    logoutCurrentUser();
+  };
   return (
     <div className='Header'>
       <div className='Header__logo'>MyShopApp</div>
@@ -25,7 +32,7 @@ const Header = ({ currentUser }) => {
         ) : null}
         <div className='Header__loginBtn'>
           {currentUser ? (
-            <div onClick={() => auth.signOut()}>Sign Out</div>
+            <div onClick={onSignOut}>Sign Out</div>
           ) : (
             <Link to='/login'>Sign In</Link>
           )}
@@ -35,4 +42,8 @@ const Header = ({ currentUser }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps, { logoutCurrentUser })(Header);

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './RegisterForm.scss';
 
 import {
   createUserProfileDocument,
   auth,
 } from '../../firebase/firebaseUtils.js';
+import { registerCurrentUser } from '../../store/actions/user';
 
-const RegisterForm = () => {
+const RegisterForm = ({ history, registerCurrentUser }) => {
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -26,17 +29,8 @@ const RegisterForm = () => {
       alert("Password don't match");
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserProfileDocument(user, { displayName });
-      setFormData({ displayName: '', email: '', password: '', password2: '' });
-    } catch (err) {
-      console.error(err);
-    }
+    registerCurrentUser(formData, history);
+    setFormData({ displayName: '', email: '', password: '', password2: '' });
   };
 
   return (
@@ -85,4 +79,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(connect(null, { registerCurrentUser })(RegisterForm));
