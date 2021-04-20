@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
 import { auth } from '../../firebase/firebaseUtils';
 import { logoutCurrentUser } from '../../store/actions/user';
+
+import shopIcon from '../../assets/images/shopIcon.png';
 import './Header.scss';
 
 const Header = ({ currentUser, logoutCurrentUser }) => {
@@ -14,7 +16,9 @@ const Header = ({ currentUser, logoutCurrentUser }) => {
   };
   return (
     <div className='Header'>
-      <div className='Header__logo'>MyShopApp</div>
+      <div className='Header__logo'>
+        <img src={shopIcon} alt='shop icon' />
+      </div>
       <div className='Header__searchBar'>
         <SearchBar />
       </div>
@@ -30,11 +34,14 @@ const Header = ({ currentUser, logoutCurrentUser }) => {
             </div>
           </>
         ) : null}
-        <div className='Header__loginBtn'>
+        <div className='Header__login'>
           {currentUser ? (
             <div onClick={onSignOut}>Sign Out</div>
           ) : (
-            <Link to='/login'>Sign In</Link>
+            <div className='Header__login-signIn'>
+              <Link to='/login'>Sign In</Link>
+              <i className='fas fa-sign-in-alt'></i>
+            </div>
           )}
         </div>
       </div>

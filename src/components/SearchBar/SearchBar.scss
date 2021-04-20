@@ -1,10 +1,16 @@
+@import '../../assets/styles/colors';
+
 .SearchBar {
     width: 100%;
 
     input {
         width: 100%;
-        padding: 0.5rem;
-        border: 1px solid rgb(15, 29, 15);
-        border-radius: 2px;
+        padding: 0.5rem 1rem;
+        border: 0;
+        border-radius: 10px;
+        height: 32px;
+        font-size: 1.2rem;
+        color: lighten($color-dark, 20);
+        outline: none;
     }
 }

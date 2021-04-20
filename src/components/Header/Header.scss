@@ -1,52 +1,62 @@
 @import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
 
 .Header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: $color-primary-light;
-    padding: 1rem;
+    padding: 0.5rem 1.5rem;
+    position: fixed;
+    width: 100%;
+    margin-top: -$margin-top-header;
 
     &__wrapper {
         display: flex;
         width: auto;
         justify-content: space-between;
         align-items: center;
+        color: #fff;
 
-        &>div {
-            margin-left: 1.5rem;
+        &>*:not(:first-child) {
+            margin-left: 2rem;
+        }
+
+        a {
+            color: #fff;
+        }
+
+        i {
+            color: #fff;
+            font-size: 1.2rem;
         }
     }
 
     &__logo {
-        text-transform: uppercase;
-        font-size: 1.5rem;
-        font-weight: 500;
+        cursor: pointer;
+
+        img {
+            width: 35px;
+        }
     }
 
     &__searchBar {
         flex-basis: 50%;
     }
 
-    // &__loginIcon {
-    //     height: 40px;
-    //     width: 40px;
-    //     border-radius: 50%;
-    //     background-color: #fff;
-    //     background-image: url('https://randomuser.me/api/portraits/women/2.jpg');
-    //     background-repeat: no-repeat;
-    //     background-position: center;
-    //     background-size: cover;
-    //     cursor: pointer;
-    // }
+    &__cartIcon {
+        cursor: pointer;
+    }
 
     &__username {
         display: flex;
         flex-direction: column;
         line-height: 1.5;
+        text-align: center;
+        cursor: pointer;
 
         span:first-child {
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 100;
         }
 
@@ -55,16 +65,24 @@
         }
     }
 
-    &__loginBtn,
-    a {
-        background: $color-primary;
-        color: white;
-        padding: 1.2rem;
-        border-radius: 3px;
+    &__login {
         cursor: pointer;
 
-        &:hover {
-            background: lighten($color-primary, 10);
+        &-signIn {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            transition: background-color $transition-time ease-in-out;
+
+            &:hover {
+                background-color: lighten($color-primary, 10);
+            }
+
+            i {
+                margin-left: 1rem;
+            }
         }
     }
+
 }

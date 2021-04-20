@@ -1,0 +1,17 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.CustomBtn {
+    background-color: lighten($color-primary, 10);
+    color: #fff;
+    font-size: 1.1rem;
+    border-radius: $border-radius-card 0 $border-radius-card 0;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color $transition-time ease-out;
+
+    &:hover {
+        background-color: $color-primary-light;
+    }
+}
