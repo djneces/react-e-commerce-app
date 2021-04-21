@@ -28,6 +28,7 @@ const Header = ({
     if (toggle) toggleDetails();
     toggleCartMenu();
   };
+
   return (
     <Fragment>
       {toggle && <AccountDetails />}
@@ -52,8 +53,10 @@ const Header = ({
               <div onClick={toggleCartDetails} className='Header__cartIcon'>
                 <i className='fas fa-shopping-basket'></i>
                 {itemsCount.length !== 0 && (
-                  <div className='Header__cartIcon--itemCount'>
-                    {itemsCount.length}
+                  <div className={'Header__cartIcon--itemCount'}>
+                    {itemsCount
+                      .map((item) => item.quantity)
+                      .reduce((acc, item) => acc + item, 0)}
                   </div>
                 )}
               </div>

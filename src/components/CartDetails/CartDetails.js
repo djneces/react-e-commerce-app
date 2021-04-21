@@ -10,6 +10,14 @@ const CartDetails = ({ toggleCartMenu, cartItems }) => {
   const toggleCartDetails = () => {
     toggleCartMenu();
   };
+
+  const totalPrice = cartItems
+    .map((cartItem) => {
+      const { price, quantity } = cartItem;
+      return price * quantity;
+    })
+    .reduce((acc, item) => acc + item, 0);
+
   return (
     <div className='CartDetails' onMouseLeave={toggleCartDetails}>
       <div className='CartDetails__header'>
@@ -18,10 +26,11 @@ const CartDetails = ({ toggleCartMenu, cartItems }) => {
       {cartItems.length > 0 ? (
         <div className='CartDetails__body'>
           {cartItems.map((cartItem, i) => {
-            const { description, product, price, url } = cartItem;
+            const { description, product, price, url, id } = cartItem;
             return (
               <CartListItem
                 key={i}
+                id={id}
                 product={product}
                 description={description}
                 price={price}
@@ -33,6 +42,9 @@ const CartDetails = ({ toggleCartMenu, cartItems }) => {
       ) : (
         <div className='CartDetails__emptyCart'>Your cart is empty</div>
       )}
+      <div className='CartDetails__footer'>
+        <h2>Your Total: US$ {totalPrice.toFixed(2)}</h2>
+      </div>
     </div>
   );
 };
