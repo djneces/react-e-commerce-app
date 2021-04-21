@@ -13,29 +13,36 @@ import { setAlert } from './alert';
 
 //SUBSCRIBE USER
 export const subscribeUser = () => async (dispatch) => {
-  //subscription
-  auth.onAuthStateChanged(async (userAuth) => {
-    if (userAuth) {
-      //storing user in the DB (Firestore)
-      const userRef = await createUserProfileDocument(userAuth);
-      //get Snapshot from the DB with an Id
-      userRef.onSnapshot((snapShot) => {
-        const { createdAt, email, displayName } = snapShot.data();
+  try {
+    //subscription
+    auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        //storing user in the DB (Firestore)
+        const userRef = await createUserProfileDocument(userAuth);
+        //get Snapshot from the DB with an Id
+        userRef.onSnapshot((snapShot) => {
+          const { createdAt, email, displayName } = snapShot.data();
 
-        const user = {
-          id: snapShot.id,
-          username: displayName,
-          email: email,
-          createdAt: createdAt.toDate(),
-        };
+          const user = {
+            id: snapShot.id,
+            username: displayName,
+            email: email,
+            createdAt: createdAt.toDate(),
+          };
 
-        dispatch({
-          type: SET_CURRENT_USER,
-          payload: user,
+          dispatch({
+            type: SET_CURRENT_USER,
+            payload: user,
+          });
         });
-      });
-    }
-  });
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
 };
 
 //SET USER

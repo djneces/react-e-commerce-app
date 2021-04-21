@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { addItemToCart } from '../../store/actions/shoppingCart';
+import CustomBtn from '../CustomBtn/CustomBtn';
 import './ListItem.scss';
 
-import CustomBtn from '../CustomBtn/CustomBtn';
-
-const ListItem = ({ product, url, description, price, discount }) => {
+const ListItem = ({
+  id,
+  product,
+  url,
+  description,
+  price,
+  discount,
+  addItemToCart,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const toggleHover = () => {
     setIsHovered(!isHovered);
+  };
+
+  const addItem = () => {
+    const item = { id, product, description, price, url };
+    addItemToCart(item);
   };
   return (
     <div className='ListItem'>
@@ -44,10 +59,10 @@ const ListItem = ({ product, url, description, price, discount }) => {
         </div>
       </div>
       <div className='ListItem__cardFooter'>
-        <CustomBtn content='Add to Cart' />
+        <CustomBtn content='Add to Cart' onclick={addItem} />
       </div>
     </div>
   );
 };
 
-export default ListItem;
+export default connect(null, { addItemToCart })(ListItem);

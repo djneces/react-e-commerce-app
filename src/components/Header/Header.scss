@@ -29,6 +29,11 @@
         i {
             color: #fff;
             font-size: 1.2rem;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-primary;
+            }
         }
     }
 
@@ -44,16 +49,11 @@
         flex-basis: 50%;
     }
 
-    &__cartIcon {
-        cursor: pointer;
-    }
-
     &__username {
         display: flex;
         flex-direction: column;
         line-height: 1.5;
         text-align: center;
-        cursor: pointer;
 
         span:first-child {
             font-size: 0.8rem;
@@ -65,8 +65,45 @@
         }
     }
 
+    &__cartIcon {
+        position: relative;
+
+        &--itemCount {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background-color: red;
+            bottom: -7px;
+            right: -3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+    }
+
     &__login {
         cursor: pointer;
+
+        &-accountDetails {
+            &:hover {
+                .arrowDown {
+                    transform: translateY(3px);
+                }
+
+                i {
+                    color: $color-primary;
+                }
+            }
+
+            i {
+                margin-left: 0.5rem;
+                font-size: 1.2rem;
+                transition: transform $transition-time ease-out;
+            }
+        }
 
         &-signIn {
             display: flex;
@@ -77,10 +114,6 @@
 
             &:hover {
                 background-color: lighten($color-primary, 10);
-            }
-
-            i {
-                margin-left: 1rem;
             }
         }
     }

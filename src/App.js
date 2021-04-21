@@ -26,8 +26,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className='App'>
-          <Header />
           <Alert />
+          <Header />
           <Switch>
             <Route exact path='/' component={LandingPage} />
             {/* redirects logged in user back to landing page if they try to access login */}

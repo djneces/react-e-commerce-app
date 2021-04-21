@@ -9,6 +9,7 @@
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    outline: none;
     transition: background-color $transition-time ease-out;
 
     &:hover {

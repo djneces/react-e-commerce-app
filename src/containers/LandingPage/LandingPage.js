@@ -11,7 +11,9 @@ const LandingPage = () => {
     <div className='LandingPage'>
       {fruits.map((fruit) => {
         const id = uuidv4();
+
         const { product, url, description, price, discount } = fruit;
+
         return (
           <ListItem
             key={id}

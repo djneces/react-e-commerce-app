@@ -1,0 +1,46 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.CartListItem {
+    width: auto;
+    display: flex;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+
+    &__image {
+        width: 60px;
+        height: 60px;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+
+        &-product {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        &-description {
+            color: $color-dark;
+            font-size: 0.9rem;
+        }
+
+        &-price {}
+    }
+
+    &__hr {
+        border-color: $color-secondary-lightest;
+        margin: 0;
+
+        &:last-of-type {
+            display: none;
+        }
+    }
+
+}
