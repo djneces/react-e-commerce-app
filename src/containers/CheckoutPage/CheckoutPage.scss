@@ -1,0 +1,8 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.CheckoutPage {
+    padding: $margin-top-header 3rem 2rem;
+    background-color: $color-light;
+    min-height: 85vh;
+}

@@ -13,5 +13,15 @@ body {
         text-decoration: none;
         color: $color-primary
     }
+}
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: $color-primary;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }

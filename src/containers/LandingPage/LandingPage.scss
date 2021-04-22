@@ -4,9 +4,8 @@
 .LandingPage {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding: 3rem;
+    padding: $margin-top-header 3rem 0;
     background-color: $color-light;
     grid-row-gap: 1.9rem;
     grid-column-gap: 1.3rem;
-    margin-top: $margin-top-header;
 }

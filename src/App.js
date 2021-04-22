@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 
 import SignInPage from './containers/SignInPage/SignInPage';
 import LandingPage from './containers/LandingPage/LandingPage';
+import CheckoutPage from './containers/CheckoutPage/CheckoutPage';
 import Alert from './components/Alert/Alert';
 import { setCurrentUser, subscribeUser } from './store/actions/user';
 
 import './App.scss';
 
 class App extends Component {
+  targetElement = null;
   componentDidMount() {
     const { subscribeUser } = this.props;
     subscribeUser();
@@ -38,6 +40,7 @@ class App extends Component {
                 currentUser ? <Redirect to='/' /> : <SignInPage />
               }
             />
+            <Route exact path='/checkout' component={CheckoutPage} />
           </Switch>
         </div>
       </BrowserRouter>

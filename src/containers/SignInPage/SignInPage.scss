@@ -1,7 +1,9 @@
 @import '../../assets/styles/utils';
+@import '../../assets/styles/colors';
 
 .SignInPage {
     display: flex;
     justify-content: center;
-    margin-top: $margin-top-header;
+    padding: $margin-top-header 3rem 0;
+    background-color: $color-light;
 }

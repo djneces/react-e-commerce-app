@@ -1,0 +1,33 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.CheckoutSummary {
+    max-width: 40vw;
+
+    h3 {
+        padding: 0.5rem 1rem;
+        background-color: lighten($color-primary, 20);
+        color: #fff;
+        border-radius: $border-radius-card;
+    }
+
+    &__orderList {
+        border-radius: $border-radius-card;
+        overflow: hidden;
+        box-shadow: $box-shadow-light;
+    }
+
+    hr {
+        border-color: $color-secondary-lightest;
+    }
+
+    &__orderTotal {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        background-color: #fff;
+        border-radius: $border-radius-card;
+        box-shadow: $box-shadow-light;
+    }
+}
