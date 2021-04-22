@@ -1,78 +1,112 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import './RegisterForm.scss';
 
+import CustomBtn from '../CustomBtn/CustomBtn';
 import { registerCurrentUser } from '../../store/actions/user';
 
-const RegisterForm = ({ history, registerCurrentUser, setAlert }) => {
-  const [formData, setFormData] = useState({
-    displayName: '',
-    email: '',
-    password: '',
-    password2: '',
-  });
-  const { email, password, password2, displayName } = formData;
+const required = (value) => (value ? undefined : 'Required field');
+const maxLength = (max) => (value) =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+const maxLength15 = maxLength(15);
+const minValue = (min) => (value) =>
+  value && value.length < min
+    ? `Must be at least ${min} characters`
+    : undefined;
+const minValue6 = minValue(6);
+const email = (value) =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined;
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (password !== password2) {
-      alert("Password don't match");
+class RegisterForm extends Component {
+  componentDidMount() {}
+  onSubmit = async (formValues) => {
+    const { passwordRegistration, password2Registration } = formValues;
+    if (passwordRegistration !== password2Registration) {
+      alert("Passwords don't match");
+      return;
     }
+    const { history, registerCurrentUser } = this.props;
 
-    registerCurrentUser(formData, history);
-    setFormData({ displayName: '', email: '', password: '', password2: '' });
+    registerCurrentUser(formValues, history);
   };
 
-  return (
-    <div className='RegisterForm'>
-      <h1>Register</h1>
-      <p>Create Your New Account</p>
-      <div className='RegisterForm__login'>
-        <form onSubmit={(e) => onSubmit(e)}>
-          <input
-            type='text'
-            placeholder='Enter your name'
+  renderError = ({ error, touched }) => {
+    if (touched && error) {
+      return (
+        <div className='RegisterForm__error-body'>
+          <div className='RegisterForm__error-message'> {error}</div>
+        </div>
+      );
+    }
+  };
+
+  renderInput = ({ input, placeholder, type, meta }) => {
+    return (
+      <div className='RegisterForm__container-input'>
+        <input
+          className={`${meta.error && meta.touched ? 'errorOutline' : ''}`}
+          {...input}
+          placeholder={placeholder}
+          type={type}
+          autoComplete='off'
+        />
+        <div className='RegisterForm__error'>{this.renderError(meta)}</div>
+      </div>
+    );
+  };
+  render() {
+    const { handleSubmit } = this.props;
+    return (
+      <div className='RegisterForm'>
+        <div className='RegisterForm__header'>
+          <h1>Register</h1>
+          <p>Create Your New Account</p>
+        </div>
+
+        <form
+          className='RegisterForm__container'
+          onSubmit={handleSubmit(this.onSubmit)}
+        >
+          <Field
             name='displayName'
-            value={displayName}
-            onChange={(e) => onChange(e)}
-            required
+            type='text'
+            validate={[minValue6, maxLength15]}
+            component={this.renderInput}
+            placeholder='Enter your name'
           />
-          <input
+          <Field
+            name='emailRegistration'
             type='email'
+            validate={[email, required]}
+            component={this.renderInput}
             placeholder='Enter your email'
-            name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
           />
-          <input
+          <Field
+            name='passwordRegistration'
             type='password'
+            validate={[required, minValue6, maxLength15]}
+            component={this.renderInput}
             placeholder='Enter your password'
-            name='password'
-            value={password}
-            onChange={(e) => onChange(e)}
-            required
           />
-          <input
+          <Field
+            name='password2Registration'
             type='password'
+            validate={[required]}
+            component={this.renderInput}
             placeholder='Confirm your password'
-            name='password2'
-            value={password2}
-            onChange={(e) => onChange(e)}
-            required
           />
-          <input type='submit' className='btn btn-primary' value='Register' />
+
+          <CustomBtn content='Register' type='submit' size='xl' />
         </form>
       </div>
-      <div className='RegisterForm__register'></div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default withRouter(connect(null, { registerCurrentUser })(RegisterForm));
+export default reduxForm({
+  form: 'registerForm',
+})(withRouter(connect(null, { registerCurrentUser })(RegisterForm)));

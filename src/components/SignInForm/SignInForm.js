@@ -1,70 +1,99 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './SignInForm.scss';
 
+import CustomBtn from '../CustomBtn/CustomBtn';
 import { loginCurrentUser } from '../../store/actions/user';
 import { signInWithGoogle } from '../../firebase/firebaseUtils.js';
 
-const SignInForm = ({ loginCurrentUser, loading, history }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-  const { email, password } = formData;
+const required = (value) => (value ? undefined : 'Required');
+const maxLength = (max) => (value) =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+const maxLength15 = maxLength(15);
+const minValue = (min) => (value) =>
+  value && value < min ? `Must be at least ${min}` : undefined;
+const minValue6 = minValue(6);
+const email = (value) =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    loginCurrentUser(formData, history);
-    setFormData({ email: '', password: '' });
+class SignInForm extends Component {
+  onSubmit = async (formValues) => {
+    const { loginCurrentUser, history } = this.props;
+    loginCurrentUser(formValues, history);
   };
 
-  return (
-    <div className='SignInForm'>
-      <h1>Sign In</h1>
-      <p>Sign In Your Account</p>
-      <div className='SignInForm__login'>
-        <form onSubmit={(e) => onSubmit(e)}>
-          <input
-            type='email'
-            placeholder='Enter your email'
+  renderError = ({ error, touched }) => {
+    if (touched && error) {
+      return (
+        <div className='SignInForm__error-body'>
+          <div className='SignInForm__error-message'> {error}</div>
+        </div>
+      );
+    }
+  };
+
+  renderInput = ({ input, placeholder, type, meta }) => {
+    return (
+      <div className='SignInForm__container-input'>
+        <input
+          className={`${meta.error && meta.touched ? 'errorOutline' : ''}`}
+          {...input}
+          placeholder={placeholder}
+          type={type}
+          autoComplete='off'
+        />
+        <div className='SignInForm__error'>{this.renderError(meta)}</div>
+      </div>
+    );
+  };
+
+  render() {
+    const { handleSubmit } = this.props;
+    return (
+      <div className='SignInForm'>
+        <div className='SignInForm__header'>
+          <h1>Sign In</h1>
+          <p>Your Account</p>
+        </div>
+
+        <form
+          className='SignInForm__container'
+          onSubmit={handleSubmit(this.onSubmit)}
+        >
+          <Field
             name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
+            type='email'
+            validate={[email, required]}
+            component={this.renderInput}
+            placeholder='Enter your email'
           />
-          <input
-            type='password'
-            placeholder='Enter your password'
+          <Field
             name='password'
-            value={password}
-            onChange={(e) => onChange(e)}
-            required
+            type='password'
+            validate={[required]}
+            component={this.renderInput}
+            placeholder='Enter your password'
           />
-          <input type='submit' className='btn btn-primary' value='Login' />
+          <CustomBtn content='Login' type='submit' size='xl' />
         </form>
-        <hr />
+
         <div className='SignInForm__socialBtn'>
           <button
             onClick={signInWithGoogle}
-            className='SignInForm__btn--google'
+            className='SignInForm__socialBtn-google'
           >
             <i className='fab fa-google'></i> Sign Up with Google
           </button>
         </div>
       </div>
-      <div className='SignInForm__register'></div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-const mapStateToProps = ({ user }) => ({
-  loading: user.loading,
-});
-
-export default withRouter(
-  connect(mapStateToProps, { loginCurrentUser })(SignInForm)
-);
+export default reduxForm({
+  form: 'signInForm',
+})(withRouter(connect(null, { loginCurrentUser })(SignInForm)));

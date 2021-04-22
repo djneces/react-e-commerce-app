@@ -74,8 +74,8 @@ export const loginCurrentUser = (user, history) => async (dispatch) => {
 export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
   try {
     const { user } = await auth.createUserWithEmailAndPassword(
-      userAuth.email,
-      userAuth.password
+      userAuth.emailRegistration,
+      userAuth.passwordRegistration
     );
     const displayName = userAuth.displayName;
 
