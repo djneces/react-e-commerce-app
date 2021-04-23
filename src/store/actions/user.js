@@ -4,6 +4,7 @@ import {
   LOGIN_CURRENT_USER,
   REGISTER_CURRENT_USER,
   AUTH_ERROR,
+  AUTH_SUCCESS,
 } from './actionTypes';
 import {
   auth,
@@ -60,7 +61,12 @@ export const loginCurrentUser = (user, history) => async (dispatch) => {
       type: LOGIN_CURRENT_USER,
     });
     dispatch(setAlert('You are logged in successfully', 'success'));
-    history.push('/');
+    setTimeout(() => {
+      dispatch({
+        type: AUTH_SUCCESS,
+      });
+      history.push('/');
+    }, 1000);
   } catch (err) {
     console.error(err);
     dispatch({
@@ -95,9 +101,10 @@ export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
 };
 
 //LOGOUT USER
-export const logoutCurrentUser = () => async (dispatch) => {
+export const logoutCurrentUser = (history) => async (dispatch) => {
   dispatch({
     type: LOGOUT_CURRENT_USER,
   });
   dispatch(setAlert('You have logged out successfully', 'success'));
+  history.push('/');
 };

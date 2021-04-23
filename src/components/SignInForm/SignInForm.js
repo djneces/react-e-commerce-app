@@ -5,16 +5,12 @@ import { connect } from 'react-redux';
 import './SignInForm.scss';
 
 import CustomBtn from '../CustomBtn/CustomBtn';
+import Checkmark from '../Checkmark/Checkmark';
+
 import { loginCurrentUser } from '../../store/actions/user';
 import { signInWithGoogle } from '../../firebase/firebaseUtils.js';
 
 const required = (value) => (value ? undefined : 'Required');
-const maxLength = (max) => (value) =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
-const minValue = (min) => (value) =>
-  value && value < min ? `Must be at least ${min}` : undefined;
-const minValue6 = minValue(6);
 const email = (value) =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
@@ -44,7 +40,7 @@ class SignInForm extends Component {
           {...input}
           placeholder={placeholder}
           type={type}
-          autoComplete='off'
+          // autoComplete='off'
         />
         <div className='SignInForm__error'>{this.renderError(meta)}</div>
       </div>
@@ -52,7 +48,8 @@ class SignInForm extends Component {
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, isLoading } = this.props;
+
     return (
       <div className='SignInForm'>
         <div className='SignInForm__header'>
@@ -79,6 +76,7 @@ class SignInForm extends Component {
             placeholder='Enter your password'
           />
           <CustomBtn content='Login' type='submit' size='xl' />
+          {isLoading && <Checkmark />}
         </form>
 
         <div className='SignInForm__socialBtn'>
@@ -93,7 +91,10 @@ class SignInForm extends Component {
     );
   }
 }
+const mapStateToProps = ({ user }) => ({
+  isLoading: user.isLoading,
+});
 
 export default reduxForm({
   form: 'signInForm',
-})(withRouter(connect(null, { loginCurrentUser })(SignInForm)));
+})(withRouter(connect(mapStateToProps, { loginCurrentUser })(SignInForm)));

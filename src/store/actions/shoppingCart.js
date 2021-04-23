@@ -3,6 +3,7 @@ import {
   TOGGLE_CART_MENU,
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
+  CLEAR_ALL_CART,
 } from './actionTypes';
 
 //quantity + 1
@@ -25,4 +26,9 @@ export const toggleCartMenu = () => ({
 export const clearItemFromCart = (item) => ({
   type: CLEAR_ITEM_FROM_CART,
   payload: item,
+});
+
+//remove from cart
+export const clearAllCart = () => ({
+  type: CLEAR_ALL_CART,
 });

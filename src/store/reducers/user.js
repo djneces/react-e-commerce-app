@@ -4,10 +4,12 @@ import {
   LOGIN_CURRENT_USER,
   REGISTER_CURRENT_USER,
   AUTH_ERROR,
+  AUTH_SUCCESS,
 } from '../actions/actionTypes';
 const INITIAL_STATE = {
   currentUser: null,
   isAuthenticated: null,
+  isLoading: false,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -29,6 +31,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: payload,
         isAuthenticated: true,
+        isLoading: true,
+      };
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
       };
     case LOGOUT_CURRENT_USER:
     case AUTH_ERROR:

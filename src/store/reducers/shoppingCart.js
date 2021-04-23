@@ -4,6 +4,7 @@ import {
   TOGGLE_CART_MENU,
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
+  CLEAR_ALL_CART,
 } from '../actions/actionTypes';
 import {
   addItemToCart,
@@ -23,6 +24,8 @@ const ShoppingCart = (state = initialState, action) => {
       return { ...state, items: removeItemFromCart(state.items, payload) };
     case CLEAR_ITEM_FROM_CART:
       return { ...state, items: clearItemFromCart(state.items, payload) };
+    case CLEAR_ALL_CART:
+      return { ...state, items: [], toggle: false };
     default:
       return state;
   }

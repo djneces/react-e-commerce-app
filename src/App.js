@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, isLoading } = this.props;
     return (
       <BrowserRouter>
         <div className='App'>
@@ -37,7 +37,7 @@ class App extends Component {
               exact
               path='/login'
               render={() =>
-                currentUser ? <Redirect to='/' /> : <SignInPage />
+                currentUser && !isLoading ? <Redirect to='/' /> : <SignInPage />
               }
             />
             <Route exact path='/checkout' component={CheckoutPage} />
@@ -50,6 +50,7 @@ class App extends Component {
 
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser,
+  isLoading: user.isLoading,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

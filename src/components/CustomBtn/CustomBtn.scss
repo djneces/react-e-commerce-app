@@ -10,10 +10,15 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     outline: none;
-    transition: background-color $transition-time ease-out;
+    backface-visibility: hidden;
+    transition: background-color $transition-time ease-out, transform $transition-time ease-out;
 
     &:hover {
         background-color: darken($color-primary-light, 10);
+    }
+
+    &:active {
+        transform: scale(0.99);
     }
 
     &.large {

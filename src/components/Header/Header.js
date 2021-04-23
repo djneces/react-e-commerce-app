@@ -45,23 +45,23 @@ const Header = ({
         </div>
         <div className='Header__wrapper'>
           {currentUser ? (
-            <>
-              <div className='Header__username'>
-                <span>Welcome back </span>
-                <span>{currentUser && currentUser.username}</span>
-              </div>
-              <div onClick={toggleCartDetails} className='Header__cartIcon'>
-                <i className='fas fa-shopping-basket'></i>
-                {itemsCount.length !== 0 && (
-                  <div className={'Header__cartIcon--itemCount'}>
-                    {itemsCount
-                      .map((item) => item.quantity)
-                      .reduce((acc, item) => acc + item, 0)}
-                  </div>
-                )}
-              </div>
-            </>
+            <div className='Header__username'>
+              <span>Welcome back </span>
+              <span>{currentUser && currentUser.username}</span>
+            </div>
           ) : null}
+
+          <div onClick={toggleCartDetails} className='Header__cartIcon'>
+            <i className='fas fa-shopping-basket'></i>
+            {itemsCount.length !== 0 && (
+              <div className={'Header__cartIcon--itemCount'}>
+                {itemsCount
+                  .map((item) => item.quantity)
+                  .reduce((acc, item) => acc + item, 0)}
+              </div>
+            )}
+          </div>
+
           <div className='Header__login'>
             {currentUser ? (
               <div

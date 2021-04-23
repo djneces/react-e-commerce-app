@@ -1,18 +1,26 @@
 @import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
 
 .Alert {
     padding: 0.8rem;
     margin: 1rem 0;
     opacity: 0.9;
-    background: $color-primary;
     color: #fff;
     border-radius: 3px;
     position: absolute;
-    left: 3rem;
-    bottom: 2rem;
+    right: 1rem;
+    top: 10rem;
+    box-shadow: $box-shadow;
+    display: flex;
+    align-items: center;
+
+    i {
+        color: $color-primary-light;
+        margin-right: 0.5rem;
+    }
 
     &.success {
-        background: $color-primary;
+        background: darken($color-primary, 10);
         color: #fff;
     }
 

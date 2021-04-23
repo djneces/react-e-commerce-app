@@ -13,6 +13,7 @@ const ListItem = ({
   price,
   discount,
   addItemToCart,
+  isAuthenticated,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const toggleHover = () => {
@@ -65,4 +66,8 @@ const ListItem = ({
   );
 };
 
-export default connect(null, { addItemToCart })(ListItem);
+const mapStateToProps = ({ user }) => ({
+  isAuthenticated: user.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { addItemToCart })(ListItem);

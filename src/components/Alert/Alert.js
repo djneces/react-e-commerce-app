@@ -7,6 +7,7 @@ const Alert = ({ alerts }) =>
   alerts.length > 0 &&
   alerts.map((alert) => (
     <div key={alert.id} className={`Alert ${alert.alertType}`}>
+      <i className='fas fa-check-circle'></i>
       {alert.msg}
     </div>
   ));
