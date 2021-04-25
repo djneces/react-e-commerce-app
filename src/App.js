@@ -40,11 +40,7 @@ class App extends Component {
               exact
               path='/login'
               render={() =>
-                currentUser && !isLoading && isLoading !== null ? (
-                  <Redirect to='/' />
-                ) : (
-                  <SignInPage />
-                )
+                currentUser ? <Redirect to='/' /> : <SignInPage />
               }
             />
             <Route exact path='/checkout' component={CheckoutPage} />

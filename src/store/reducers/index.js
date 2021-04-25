@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+//use local storage (session storage is another folder)
+import storage from 'redux-persist/lib/storage';
 import userReducer from './user';
 import alertReducer from './alert';
 import toggleMenu from './accountDetails';
@@ -7,7 +10,13 @@ import purchase from './purchase';
 import orderHistory from './orderHistory';
 import { reducer as formReducer } from 'redux-form';
 
-export default combineReducers({
+const persistConfig = {
+  key: 'root',
+  storage,
+  //reducers we need to persist
+  whitelist: ['cart', 'orderHistory', 'purchase', 'user'],
+};
+const rootReducer = combineReducers({
   user: userReducer,
   alerts: alertReducer,
   toggleMenu: toggleMenu,
@@ -16,3 +25,5 @@ export default combineReducers({
   orderHistory: orderHistory,
   form: formReducer,
 });
+
+export default persistReducer(persistConfig, rootReducer);

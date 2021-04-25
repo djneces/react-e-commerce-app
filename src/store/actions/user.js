@@ -121,7 +121,6 @@ export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
           type: AUTH_ERROR,
         });
       });
-    console.log(newUserId);
 
     //creating user in Firestore
     const { user } = await auth.createUserWithEmailAndPassword(
