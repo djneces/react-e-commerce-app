@@ -1,7 +1,12 @@
 import axios from '../../axios-orders';
 import { setAlert } from '../../store/actions/alert';
 import { clearAllCart } from '../../store/actions/shoppingCart';
-import { PURCHASE_START, PURCHASE_SUCCESS, PURCHASE_FAIL } from './actionTypes';
+import {
+  PURCHASE_START,
+  PURCHASE_SUCCESS,
+  PURCHASE_FAIL,
+  CLEAR_ALL_PURCHASES,
+} from './actionTypes';
 
 //purchase start
 export const purchaseStart = () => {
@@ -23,6 +28,13 @@ export const purchaseFail = (error) => {
   return {
     type: PURCHASE_FAIL,
     error: error,
+  };
+};
+
+//clear all purchases
+export const clearAllPurchases = () => {
+  return {
+    type: CLEAR_ALL_PURCHASES,
   };
 };
 

@@ -30,11 +30,17 @@ export const fetchOrderHistory = (userId) => async (dispatch) => {
       .equalTo(userId);
     query.on('value', function (snapshot) {
       snapshot.forEach(function (userSnapshot) {
-        const fetchedOrders = Object.values(userSnapshot.val().orders);
-        dispatch({
-          type: FETCH_ORDERS_SUCCESS,
-          payload: fetchedOrders,
-        });
+        if (userSnapshot) {
+          if (userSnapshot.val().orders === undefined) {
+            dispatch(fetchOrdersFail('No records found'));
+            return;
+          }
+          const fetchedOrders = Object.values(userSnapshot.val()?.orders);
+          dispatch({
+            type: FETCH_ORDERS_SUCCESS,
+            payload: fetchedOrders,
+          });
+        }
       });
     });
   } catch (err) {

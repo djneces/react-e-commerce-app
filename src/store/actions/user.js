@@ -25,21 +25,20 @@ export const subscribeUser = () => async (dispatch) => {
         const userRef = await createUserProfileDocument(userAuth);
         //get Snapshot from the DB with an Id
         userRef.onSnapshot((snapShot) => {
-          const { createdAt, email, displayName, userDbId } = snapShot.data();
+          if (snapShot.exists) {
+            const { createdAt, email, displayName, userDbId } = snapShot.data();
 
-          const user = {
-            id: snapShot.id,
-            username: displayName,
-            email: email,
-            createdAt: createdAt.toDate(),
-            userDbId: userDbId,
-          };
+            const user = {
+              id: snapShot.id,
+              username: displayName,
+              email: email,
+              createdAt: createdAt.toDate(),
+              userDbId: userDbId,
+            };
 
-          dispatch({
-            type: SET_CURRENT_USER,
-            payload: user,
-          });
-          dispatch(fetchOrderHistory(userDbId));
+            dispatch(setCurrentUser(user));
+            dispatch(fetchOrderHistory(userDbId));
+          }
         });
       }
     });

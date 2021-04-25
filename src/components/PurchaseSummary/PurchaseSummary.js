@@ -29,7 +29,7 @@ const PurchaseSummary = ({ orderHistory }) => {
       <div className='PurchaseSummary__order' key={i}>
         <div className='PurchaseSummary__timeStamp'>
           <span>{moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}</span>
-          <span>{moment(createdAt).startOf('day').fromNow()}</span>
+          <span>{moment(createdAt).startOf().fromNow()}</span>
         </div>
         <div className='PurchaseSummary__orderDetails'>{items}</div>
         <div className='PurchaseSummary__priceTotal'>

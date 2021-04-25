@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutCurrentUser } from '../../store/actions/user';
 import { toggleAccountDetails } from '../../store/actions/accountDetails';
+import { clearAllPurchases } from '../../store/actions/purchase';
 import { clearAllCart } from '../../store/actions/shoppingCart';
 
 import './AccountDetails.scss';
@@ -12,11 +13,13 @@ const AccountDetails = ({
   toggleAccountDetails,
   clearAllCart,
   history,
+  clearAllPurchases,
 }) => {
   const onSignOut = () => {
     logoutCurrentUser(history);
     clearAllCart();
     toggleAccountDetails();
+    clearAllPurchases();
   };
 
   const renderPurchaseHistory = () => {
@@ -55,5 +58,6 @@ export default withRouter(
     logoutCurrentUser,
     toggleAccountDetails,
     clearAllCart,
+    clearAllPurchases,
   })(AccountDetails)
 );

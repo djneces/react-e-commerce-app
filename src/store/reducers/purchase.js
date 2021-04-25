@@ -2,12 +2,12 @@ import {
   PURCHASE_START,
   PURCHASE_SUCCESS,
   PURCHASE_FAIL,
+  CLEAR_ALL_PURCHASES,
 } from '../actions/actionTypes';
 
 const initialState = {
   orders: [],
   loading: false,
-  purchased: false,
 };
 
 const Purchase = (state = initialState, action) => {
@@ -18,13 +18,13 @@ const Purchase = (state = initialState, action) => {
     case PURCHASE_SUCCESS:
       return {
         ...state,
-        purchased: true,
         loading: false,
         orders: [...state.orders, payload],
       };
     case PURCHASE_FAIL:
       return { ...state, loading: false };
-
+    case CLEAR_ALL_PURCHASES:
+      return { ...state, orders: [], loading: false };
     default:
       return state;
   }

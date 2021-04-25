@@ -8,20 +8,26 @@ import './PurchaseHistory.scss';
 
 class PurchaseHistory extends Component {
   async componentDidMount() {
-    const { userId, fetchOrderHistory } = this.props;
-    if (userId) {
+    const { userId, fetchOrderHistory, orderHistory } = this.props;
+    if (userId && orderHistory.length === 0) {
       fetchOrderHistory(userId);
     }
   }
   render() {
-    const { historyIsLoading } = this.props;
+    const { historyIsLoading, orderHistory } = this.props;
 
     return (
       <>
         <div className='PurchaseHistory'>
           <h1>Purchase history</h1>
           {historyIsLoading && <SpinnerLine />}
-          <PurchaseSummary />
+          {orderHistory.length > 0 && !historyIsLoading ? (
+            <PurchaseSummary />
+          ) : (
+            <div className='PurchaseHistory__noRecords'>
+              You don't have any history at the moment
+            </div>
+          )}
         </div>
       </>
     );
@@ -32,6 +38,7 @@ const mapStateToProps = ({ user, orderHistory }) => ({
   userId: user.currentUser?.userDbId,
   currentUser: user.currentUser,
   historyIsLoading: orderHistory.loading,
+  orderHistory: orderHistory.orderHistory,
 });
 
 export default connect(mapStateToProps, { fetchOrderHistory })(PurchaseHistory);
