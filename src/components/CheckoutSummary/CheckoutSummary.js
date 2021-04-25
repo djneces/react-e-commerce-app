@@ -12,6 +12,7 @@ const CheckoutSummary = ({ selectedItems }) => {
       return price * quantity;
     })
     .reduce((acc, item) => acc + item, 0);
+
   return (
     <>
       <div className='CheckoutSummary'>
@@ -19,6 +20,9 @@ const CheckoutSummary = ({ selectedItems }) => {
         <div className='CheckoutSummary__orderList'>
           {selectedItems?.map((cartItem, i) => {
             const { id, product, description, price, url } = cartItem;
+            const selectedItem = selectedItems.filter(
+              (item) => item.id === id
+            )[0];
             return (
               <SummaryListItem
                 key={i}
@@ -27,6 +31,7 @@ const CheckoutSummary = ({ selectedItems }) => {
                 description={description}
                 price={price}
                 url={url}
+                quantity={selectedItem.quantity}
               />
             );
           })}

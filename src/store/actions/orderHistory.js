@@ -4,6 +4,7 @@ import {
   FETCH_ORDERS_START,
 } from './actionTypes';
 import { setAlert } from '../actions/alert';
+import { subscribeUser } from '../actions/user';
 import { database } from '../../firebase/firebaseUtils';
 
 export const fetchOrdersFail = (error) => {

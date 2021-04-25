@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutCurrentUser } from '../../store/actions/user';
 import { toggleAccountDetails } from '../../store/actions/accountDetails';
-import { fetchOrderHistory } from '../../store/actions/orderHistory';
 import { clearAllCart } from '../../store/actions/shoppingCart';
 
 import './AccountDetails.scss';
@@ -13,8 +12,6 @@ const AccountDetails = ({
   toggleAccountDetails,
   clearAllCart,
   history,
-  fetchOrderHistory,
-  userId,
 }) => {
   const onSignOut = () => {
     logoutCurrentUser(history);
@@ -23,7 +20,6 @@ const AccountDetails = ({
   };
 
   const renderPurchaseHistory = () => {
-    fetchOrderHistory(userId);
     history.push('/orders');
   };
 
@@ -54,15 +50,10 @@ const AccountDetails = ({
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  userId: user.currentUser?.userDbId,
-});
-
 export default withRouter(
-  connect(mapStateToProps, {
+  connect(null, {
     logoutCurrentUser,
     toggleAccountDetails,
     clearAllCart,
-    fetchOrderHistory,
   })(AccountDetails)
 );

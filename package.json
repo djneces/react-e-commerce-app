@@ -10,6 +10,7 @@
     "body-scroll-lock": "^3.1.5",
     "config": "^3.3.6",
     "firebase": "^8.4.1",
+    "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -15,7 +15,7 @@ const Purchase = (state = initialState, action) => {
     case FETCH_ORDERS_START:
       return { ...state, loading: true };
     case FETCH_ORDERS_SUCCESS:
-      return { ...state, orderHistory: payload, loading: false };
+      return { ...state, orderHistory: payload.reverse(), loading: false };
     case FETCH_ORDERS_FAIL:
       return { ...state, loading: false };
     default:

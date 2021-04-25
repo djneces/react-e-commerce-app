@@ -12,6 +12,7 @@ import {
   createUserProfileDocument,
   signInWithGoogle,
 } from '../../firebase/firebaseUtils.js';
+import { fetchOrderHistory } from '../actions/orderHistory';
 import { setAlert } from './alert';
 
 //SUBSCRIBE USER
@@ -38,6 +39,7 @@ export const subscribeUser = () => async (dispatch) => {
             type: SET_CURRENT_USER,
             payload: user,
           });
+          dispatch(fetchOrderHistory(userDbId));
         });
       }
     });

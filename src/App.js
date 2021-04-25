@@ -17,7 +17,6 @@ class App extends Component {
   targetElement = null;
   componentDidMount() {
     const { subscribeUser } = this.props;
-
     subscribeUser();
   }
 
