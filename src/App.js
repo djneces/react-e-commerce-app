@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import history from './history';
 import { connect } from 'react-redux';
 
 import SignInPage from './containers/SignInPage/SignInPage';
 import LandingPage from './containers/LandingPage/LandingPage';
 import CheckoutPage from './containers/CheckoutPage/CheckoutPage';
+import PurchaseHistory from './containers/PurchaseHistory/PurchaseHistory';
 import Alert from './components/Alert/Alert';
-import { setCurrentUser, subscribeUser } from './store/actions/user';
+import { subscribeUser } from './store/actions/user';
 
 import './App.scss';
 
@@ -15,6 +17,7 @@ class App extends Component {
   targetElement = null;
   componentDidMount() {
     const { subscribeUser } = this.props;
+
     subscribeUser();
   }
 
@@ -25,8 +28,9 @@ class App extends Component {
 
   render() {
     const { currentUser, isLoading } = this.props;
+
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className='App'>
           <Alert />
           <Header />
@@ -37,13 +41,18 @@ class App extends Component {
               exact
               path='/login'
               render={() =>
-                currentUser && !isLoading ? <Redirect to='/' /> : <SignInPage />
+                currentUser && !isLoading && isLoading !== null ? (
+                  <Redirect to='/' />
+                ) : (
+                  <SignInPage />
+                )
               }
             />
             <Route exact path='/checkout' component={CheckoutPage} />
+            <Route exact path='/orders' component={PurchaseHistory} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -57,4 +66,4 @@ const mapStateToProps = ({ user }) => ({
 //   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 // });
 
-export default connect(mapStateToProps, { setCurrentUser, subscribeUser })(App);
+export default connect(mapStateToProps, { subscribeUser })(App);

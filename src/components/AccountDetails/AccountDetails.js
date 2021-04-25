@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { auth } from '../../firebase/firebaseUtils';
 import { logoutCurrentUser } from '../../store/actions/user';
 import { toggleAccountDetails } from '../../store/actions/accountDetails';
+import { fetchOrderHistory } from '../../store/actions/orderHistory';
 import { clearAllCart } from '../../store/actions/shoppingCart';
 
 import './AccountDetails.scss';
@@ -13,12 +13,18 @@ const AccountDetails = ({
   toggleAccountDetails,
   clearAllCart,
   history,
+  fetchOrderHistory,
+  userId,
 }) => {
   const onSignOut = () => {
-    auth.signOut();
+    logoutCurrentUser(history);
     clearAllCart();
     toggleAccountDetails();
-    logoutCurrentUser(history);
+  };
+
+  const renderPurchaseHistory = () => {
+    fetchOrderHistory(userId);
+    history.push('/orders');
   };
 
   const toggleDetails = () => {
@@ -29,7 +35,10 @@ const AccountDetails = ({
       <div className='AccountDetails__header'>
         <h2>Account Details</h2>
       </div>
-      <div className='AccountDetails__purchaseHistory'>
+      <div
+        onClick={renderPurchaseHistory}
+        className='AccountDetails__purchaseHistory'
+      >
         <i className='fas fa-money-bill-wave'></i>
         Purchase History
       </div>
@@ -45,8 +54,15 @@ const AccountDetails = ({
   );
 };
 
+const mapStateToProps = ({ user }) => ({
+  userId: user.currentUser?.userDbId,
+});
+
 export default withRouter(
-  connect(null, { logoutCurrentUser, toggleAccountDetails, clearAllCart })(
-    AccountDetails
-  )
+  connect(mapStateToProps, {
+    logoutCurrentUser,
+    toggleAccountDetails,
+    clearAllCart,
+    fetchOrderHistory,
+  })(AccountDetails)
 );

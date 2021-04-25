@@ -1,0 +1,99 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+
+.ShippingDetails {
+    width: 40vw;
+    border: 1px solid $color-primary;
+    border-radius: $border-radius-card;
+    border: none;
+    box-shadow: $box-shadow-light;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+
+    &__container {
+        width: 35vw;
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 0;
+        padding: 0 1rem;
+
+        &-heading {
+            margin-bottom: 2rem;
+
+            h4 {
+                margin: 0;
+            }
+        }
+
+        &-input {
+            padding: 0.5rem;
+            margin-bottom: 0.3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+
+            label {
+                transform: translateY(-28px);
+                padding: 0 0.5rem;
+                opacity: 0;
+                z-index: -1;
+                transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
+                color: $color-grey;
+            }
+
+            input {
+                font-size: 1rem;
+                padding: 0.5rem 0.5rem;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid $color-primary;
+                background-color: $color-light;
+                border-radius: $border-radius-input $border-radius-input 0 0;
+
+                &:focus {
+                    border-bottom: 2px solid $color-primary;
+                }
+
+                &.errorOutline {
+                    border: 1px solid rgba(163, 7, 7, 0.9);
+                }
+
+                &:not(:placeholder-shown)+label {
+                    transform: translateY(3px);
+                    opacity: 1;
+                    z-index: 1;
+                }
+            }
+
+
+        }
+
+        &-name {
+            display: flex;
+            align-items: flex-start;
+
+            .first {
+                width: 40%;
+            }
+
+            .last {
+                width: 60%;
+            }
+        }
+    }
+
+    &__error {
+        &-body {
+            padding: 0.5rem 1rem;
+            color: rgba(163, 7, 7, 0.9);
+            margin-top: 0.2rem;
+            display: block;
+        }
+    }
+
+}

@@ -25,7 +25,15 @@
     }
 
     &.danger {
-        background: rgb(87, 14, 14);
+        background: rgb(184, 3, 3);
         color: #fff;
+    }
+
+    &.purchased {
+        background-color: orange;
+        width: 30vw;
+        height: 20vh;
+        text-transform: uppercase;
+        font-weight: bold;
     }
 }

@@ -7,8 +7,8 @@ import './SignInForm.scss';
 import CustomBtn from '../CustomBtn/CustomBtn';
 import Checkmark from '../Checkmark/Checkmark';
 
-import { loginCurrentUser } from '../../store/actions/user';
-import { signInWithGoogle } from '../../firebase/firebaseUtils.js';
+import { loginCurrentUser, signInGoogle } from '../../store/actions/user';
+// import { signInWithGoogle } from '../../firebase/firebaseUtils.js';
 
 const required = (value) => (value ? undefined : 'Required');
 const email = (value) =>
@@ -48,7 +48,7 @@ class SignInForm extends Component {
   };
 
   render() {
-    const { handleSubmit, isLoading } = this.props;
+    const { handleSubmit, isLoading, signInGoogle, isTouched } = this.props;
 
     return (
       <div className='SignInForm'>
@@ -76,12 +76,12 @@ class SignInForm extends Component {
             placeholder='Enter your password'
           />
           <CustomBtn content='Login' type='submit' size='xl' />
-          {isLoading && <Checkmark />}
+          {isLoading && isTouched && <Checkmark />}
         </form>
 
         <div className='SignInForm__socialBtn'>
           <button
-            onClick={signInWithGoogle}
+            onClick={signInGoogle}
             className='SignInForm__socialBtn-google'
           >
             <i className='fab fa-google'></i> Sign Up with Google
@@ -91,10 +91,15 @@ class SignInForm extends Component {
     );
   }
 }
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, form }) => ({
   isLoading: user.isLoading,
+  isTouched: form?.signInForm?.anyTouched,
 });
 
 export default reduxForm({
   form: 'signInForm',
-})(withRouter(connect(mapStateToProps, { loginCurrentUser })(SignInForm)));
+})(
+  withRouter(
+    connect(mapStateToProps, { loginCurrentUser, signInGoogle })(SignInForm)
+  )
+);

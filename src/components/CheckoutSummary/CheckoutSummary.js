@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SummaryListItem from '../CheckoutSummary/SummaryListItem/SummaryListItem';
+import ShippingDetails from '../ShippingDetails/ShippingDetails';
 import './CheckoutSummary.scss';
 
 const CheckoutSummary = ({ selectedItems }) => {
@@ -12,29 +13,35 @@ const CheckoutSummary = ({ selectedItems }) => {
     })
     .reduce((acc, item) => acc + item, 0);
   return (
-    <div className='CheckoutSummary'>
-      <h3>Summary of your order</h3>
-      <div className='CheckoutSummary__orderList'>
-        {selectedItems?.map((cartItem, i) => {
-          const { id, product, description, price, url } = cartItem;
-          return (
-            <SummaryListItem
-              key={i}
-              id={id}
-              product={product}
-              description={description}
-              price={price}
-              url={url}
-            />
-          );
-        })}
+    <>
+      <div className='CheckoutSummary'>
+        <h3>Summary of your order</h3>
+        <div className='CheckoutSummary__orderList'>
+          {selectedItems?.map((cartItem, i) => {
+            const { id, product, description, price, url } = cartItem;
+            return (
+              <SummaryListItem
+                key={i}
+                id={id}
+                product={product}
+                description={description}
+                price={price}
+                url={url}
+              />
+            );
+          })}
+        </div>
+        <hr />
+        <div className='CheckoutSummary__orderTotal'>
+          <div>Order Total</div>
+          <div>US$ {totalPrice.toFixed(2)}</div>
+        </div>
       </div>
-      <hr />
-      <div className='CheckoutSummary__orderTotal'>
-        <div>Order Total</div>
-        <div>{totalPrice.toFixed(2)}</div>
+      <div className='ShippingForm'>
+        <h3>Shipping Details</h3>
+        <ShippingDetails />
       </div>
-    </div>
+    </>
   );
 };
 

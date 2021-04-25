@@ -17,7 +17,7 @@
     justify-content: space-between;
     font-size: 1rem;
     border-bottom-left-radius: $border-radius-card;
-    overscroll-behavior: contain;
+    z-index: 10;
 
     &__header {
         display: flex;

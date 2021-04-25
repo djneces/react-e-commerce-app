@@ -9,7 +9,7 @@ import {
 const INITIAL_STATE = {
   currentUser: null,
   isAuthenticated: null,
-  isLoading: false,
+  isLoading: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -24,18 +24,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case REGISTER_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: true,
+        isLoading: true,
       };
     case LOGIN_CURRENT_USER:
       return {
         ...state,
-        currentUser: payload,
         isAuthenticated: true,
         isLoading: true,
       };
     case AUTH_SUCCESS:
       return {
         ...state,
+        isAuthenticated: true,
         isLoading: false,
       };
     case LOGOUT_CURRENT_USER:

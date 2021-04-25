@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './RegisterForm.scss';
 
 import CustomBtn from '../CustomBtn/CustomBtn';
+import Checkmark from '../Checkmark/Checkmark';
 import { registerCurrentUser } from '../../store/actions/user';
 
 const required = (value) => (value ? undefined : 'Required field');
@@ -59,7 +60,7 @@ class RegisterForm extends Component {
     );
   };
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, isLoading, isTouched } = this.props;
     return (
       <div className='RegisterForm'>
         <div className='RegisterForm__header'>
@@ -101,12 +102,18 @@ class RegisterForm extends Component {
           />
 
           <CustomBtn content='Register' type='submit' size='xl' />
+          {isLoading && isTouched && <Checkmark />}
         </form>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user, form }) => ({
+  isLoading: user.isLoading,
+  isTouched: form?.registerForm?.anyTouched,
+});
+
 export default reduxForm({
   form: 'registerForm',
-})(withRouter(connect(null, { registerCurrentUser })(RegisterForm)));
+})(withRouter(connect(mapStateToProps, { registerCurrentUser })(RegisterForm)));

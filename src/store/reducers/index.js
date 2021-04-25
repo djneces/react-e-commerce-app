@@ -3,6 +3,8 @@ import userReducer from './user';
 import alertReducer from './alert';
 import toggleMenu from './accountDetails';
 import shoppingCart from './shoppingCart';
+import purchase from './purchase';
+import orderHistory from './orderHistory';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -10,5 +12,7 @@ export default combineReducers({
   alerts: alertReducer,
   toggleMenu: toggleMenu,
   cart: shoppingCart,
+  purchase: purchase,
+  orderHistory: orderHistory,
   form: formReducer,
 });
