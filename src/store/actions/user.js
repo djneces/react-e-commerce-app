@@ -11,6 +11,7 @@ import {
   auth,
   createUserProfileDocument,
   signInWithGoogle,
+  firestore,
 } from '../../firebase/firebaseUtils.js';
 import { fetchOrderHistory } from '../actions/orderHistory';
 import { setAlert } from './alert';
@@ -54,6 +55,7 @@ export const subscribeUser = () => async (dispatch) => {
 export const signInGoogle = () => async (dispatch) => {
   try {
     await signInWithGoogle();
+
     dispatch(setAlert('You are logged in successfully', 'success'));
     dispatch({
       type: AUTH_SUCCESS,
@@ -100,28 +102,6 @@ export const loginCurrentUser = (user, history) => async (dispatch) => {
 //REGISTER USER
 export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
   try {
-    const newUser = {
-      email: userAuth.emailRegistration,
-      username: userAuth.displayName,
-    };
-
-    //creating user profile in Realtime DB
-    let newUserId;
-    await axios
-      .post('/users/.json', newUser)
-      .then((response) => {
-        newUserId = response.data.name;
-        dispatch({
-          type: REGISTER_CURRENT_USER,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch({
-          type: AUTH_ERROR,
-        });
-      });
-
     //creating user in Firestore
     const { user } = await auth.createUserWithEmailAndPassword(
       userAuth.emailRegistration,
@@ -129,7 +109,6 @@ export const registerCurrentUser = (userAuth, history) => async (dispatch) => {
     );
     const additionalData = {
       displayName: userAuth.displayName,
-      userDbId: newUserId,
     };
 
     await createUserProfileDocument(user, additionalData);
@@ -167,7 +146,7 @@ export const updateContactDetails = (updatedDetails, userId) => async (
   await axios
     .patch(`/users/${userId}/.json`, updatedDetails)
     .then((response) => {
-      console.log(response.data.name);
+      // console.log(response.data.name);
     })
     .catch((err) => {
       console.error(err);

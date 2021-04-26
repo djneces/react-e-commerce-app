@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, isLoading } = this.props;
+    const { currentUser } = this.props;
 
     return (
       <Router history={history}>
@@ -54,7 +54,6 @@ class App extends Component {
 
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser,
-  isLoading: user.isLoading,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

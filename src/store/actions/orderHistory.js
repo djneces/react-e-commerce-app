@@ -2,11 +2,13 @@ import {
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAIL,
   FETCH_ORDERS_START,
+  CLEAR_ORDER_HISTORY,
 } from './actionTypes';
 import { setAlert } from '../actions/alert';
-import { subscribeUser } from '../actions/user';
+
 import { database } from '../../firebase/firebaseUtils';
 
+//FETCH ORDERS FAIL
 export const fetchOrdersFail = (error) => {
   return {
     type: FETCH_ORDERS_FAIL,
@@ -14,9 +16,17 @@ export const fetchOrdersFail = (error) => {
   };
 };
 
+//FETCH ORDER START
 export const fetchOrdersStart = () => {
   return {
     type: FETCH_ORDERS_START,
+  };
+};
+
+//CLEAR ALL HISTORY
+export const clearOrderHistory = () => {
+  return {
+    type: CLEAR_ORDER_HISTORY,
   };
 };
 

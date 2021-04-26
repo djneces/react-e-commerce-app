@@ -2,6 +2,7 @@ import {
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAIL,
   FETCH_ORDERS_START,
+  CLEAR_ORDER_HISTORY,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -18,6 +19,8 @@ const Purchase = (state = initialState, action) => {
       return { ...state, orderHistory: payload.reverse(), loading: false };
     case FETCH_ORDERS_FAIL:
       return { ...state, loading: false };
+    case CLEAR_ORDER_HISTORY:
+      return { ...state, orderHistory: [], loading: false };
     default:
       return state;
   }

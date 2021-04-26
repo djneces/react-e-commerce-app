@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/database';
+import axios from '../axios-orders';
 
 const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 
@@ -26,11 +27,37 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
+    const newUser = {
+      email: email,
+      username: displayName,
+      ...additionalData,
+    };
+    console.log(newUser);
+
+    //creating user profile in Realtime DB
+    let userDbId;
+    await axios
+      .post('/users/.json', newUser)
+      .then((response) => {
+        userDbId = response.data.name;
+        // dispatch({
+        //   type: REGISTER_CURRENT_USER,
+        // });
+      })
+      .catch((err) => {
+        console.error(err);
+        // dispatch({
+        //   type: AUTH_ERROR,
+        // });
+      });
+
+    console.log(additionalData);
     try {
       await userRef.set({
         displayName,
         email,
         createdAt,
+        userDbId,
         ...additionalData,
       });
     } catch (err) {

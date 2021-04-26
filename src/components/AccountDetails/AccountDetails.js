@@ -5,6 +5,7 @@ import { logoutCurrentUser } from '../../store/actions/user';
 import { toggleAccountDetails } from '../../store/actions/accountDetails';
 import { clearAllPurchases } from '../../store/actions/purchase';
 import { clearAllCart } from '../../store/actions/shoppingCart';
+import { clearOrderHistory } from '../../store/actions/orderHistory';
 
 import './AccountDetails.scss';
 
@@ -14,12 +15,14 @@ const AccountDetails = ({
   clearAllCart,
   history,
   clearAllPurchases,
+  clearOrderHistory,
 }) => {
   const onSignOut = () => {
     logoutCurrentUser(history);
     clearAllCart();
     toggleAccountDetails();
     clearAllPurchases();
+    clearOrderHistory();
   };
 
   const renderPurchaseHistory = () => {
@@ -59,5 +62,6 @@ export default withRouter(
     toggleAccountDetails,
     clearAllCart,
     clearAllPurchases,
+    clearOrderHistory,
   })(AccountDetails)
 );
