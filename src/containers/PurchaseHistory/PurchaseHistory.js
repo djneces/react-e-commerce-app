@@ -7,8 +7,9 @@ import SpinnerLine from '../../components/Spinner/SpinnerLine';
 import './PurchaseHistory.scss';
 
 class PurchaseHistory extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     const { userId, fetchOrderHistory, orderHistory } = this.props;
+    //loading only when orderHistory is empty
     if (userId && orderHistory.length === 0) {
       fetchOrderHistory(userId);
     }

@@ -3,7 +3,7 @@ import React from 'react';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import './CheckoutPage.scss';
 
-const CheckoutPage = ({ selectedItems }) => {
+const CheckoutPage = () => {
   return (
     <div className='CheckoutPage'>
       <CheckoutSummary />

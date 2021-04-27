@@ -85,6 +85,18 @@
                 width: 60%;
             }
         }
+
+        &-continueBtn {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 1rem;
+
+            .SpinnerLine {
+                position: absolute;
+            }
+        }
     }
 
     &__error {

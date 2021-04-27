@@ -1,0 +1,49 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.ProfilePage {
+    padding: $margin-top-header 3rem 2rem;
+    background-color: $color-light;
+    min-height: 85vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    h3:first-child {
+        padding: 0.5rem 1rem;
+        background-color: lighten($color-primary, 20);
+        color: #fff;
+        border-radius: $border-radius-card;
+    }
+
+    &__account {
+        width: 40vw;
+
+        &-details {
+            border-radius: $border-radius-card;
+            border: none;
+            box-shadow: $box-shadow-light;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #fff;
+            padding: 1rem 2rem;
+
+            &>div {
+                padding: 1rem 0.5rem;
+                background-color: $color-light;
+                width: 100%;
+                margin: 0.5rem 0;
+                border-radius: $border-radius-input;
+                display: flex;
+                justify-content: space-between;
+
+                span:last-child {
+                    font-weight: 500;
+                }
+            }
+        }
+
+    }
+}

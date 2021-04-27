@@ -37,4 +37,13 @@
 
 .ShippingForm {
     width: 40vw;
+
+    &__login {
+        #redOutline {
+            background-color: #fff;
+            border: 1px solid $color-red;
+            color: $color-primary;
+            text-align: center;
+        }
+    }
 }

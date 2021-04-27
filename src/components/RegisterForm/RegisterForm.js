@@ -60,7 +60,7 @@ class RegisterForm extends Component {
     );
   };
   render() {
-    const { handleSubmit, isLoading, isTouched } = this.props;
+    const { handleSubmit, isLoading, isTouched, formValues } = this.props;
     return (
       <div className='RegisterForm'>
         <div className='RegisterForm__header'>
@@ -101,8 +101,12 @@ class RegisterForm extends Component {
             placeholder='Confirm your password'
           />
 
-          <CustomBtn content='Register' type='submit' size='xl' />
-          {isLoading && isTouched && <Checkmark />}
+          <div className='RegisterForm__loginBtn'>
+            <CustomBtn content='Register' type='submit' size='xl' width='100' />
+            {isLoading && isTouched && formValues !== undefined && (
+              <Checkmark />
+            )}
+          </div>
         </form>
       </div>
     );
@@ -112,6 +116,7 @@ class RegisterForm extends Component {
 const mapStateToProps = ({ user, form }) => ({
   isLoading: user.isLoading,
   isTouched: form?.registerForm?.anyTouched,
+  formValues: form?.registerForm?.values,
 });
 
 export default reduxForm({

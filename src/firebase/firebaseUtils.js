@@ -20,9 +20,11 @@ const config = {
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
+  //getting ref a snapshot from Firestore
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
 
+  //creating record in Firestore for new users
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -32,38 +34,42 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       username: displayName,
       ...additionalData,
     };
-    console.log(newUser);
 
-    //creating user profile in Realtime DB
-    let userDbId;
-    await axios
-      .post('/users/.json', newUser)
-      .then((response) => {
-        userDbId = response.data.name;
-        // dispatch({
-        //   type: REGISTER_CURRENT_USER,
-        // });
-      })
-      .catch((err) => {
-        console.error(err);
-        // dispatch({
-        //   type: AUTH_ERROR,
-        // });
-      });
+    //checking if email already exists in Realtime Database
+    database
+      .ref('users')
+      .orderByChild('email')
+      .equalTo(email)
+      .once('value', async (snapshot) => {
+        const userData = snapshot.val();
 
-    console.log(additionalData);
-    try {
-      await userRef.set({
-        displayName,
-        email,
-        createdAt,
-        userDbId,
-        ...additionalData,
+        if (userData === null) {
+          //creating user profile in Realtime DB
+          let userDbId;
+          await axios
+            .post('/users/.json', newUser)
+            .then((response) => {
+              //getting back the user Id from the DB
+              userDbId = response.data.name;
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+
+          try {
+            //creating user in Firestore
+            await userRef.set({
+              displayName,
+              email,
+              createdAt,
+              userDbId,
+              ...additionalData,
+            });
+          } catch (err) {
+            console.log('Error creating user', err.message);
+          }
+        }
       });
-    } catch (err) {
-      console.log('Error creating user', err.message);
-      throw err;
-    }
   }
   return userRef;
 };
@@ -75,7 +81,7 @@ export const firestore = firebase.firestore();
 export const database = firebase.database();
 
 const provider = new firebase.auth.GoogleAuthProvider();
-//always trigger Google pop up
+//always triggers Google pop up
 provider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 

@@ -31,12 +31,16 @@ class ShippingDetails extends Component {
       currentUser,
       userDbId,
       history,
+      location,
     } = this.props;
     const userData = { ...currentUser, contactDetails: formValues };
-    updateContactDetails(userData, userDbId);
+    updateContactDetails(userData, userDbId, location);
 
-    const orderData = { orderItems: cartItems, createdAt: new Date() };
-    createOrder(orderData, userDbId, history);
+    //sends order to the DB only from /checkout (form is use in ProfilePage to update contact details too)
+    if (location.pathname === '/checkout') {
+      const orderData = { orderItems: cartItems, createdAt: new Date() };
+      createOrder(orderData, userDbId, history);
+    }
   };
 
   renderError = ({ error, touched }) => {
@@ -69,7 +73,8 @@ class ShippingDetails extends Component {
     );
   };
   render() {
-    const { handleSubmit, purchaseLoading } = this.props;
+    const { handleSubmit, purchaseLoading, content } = this.props;
+
     return (
       <div className='ShippingDetails'>
         <form
@@ -143,9 +148,10 @@ class ShippingDetails extends Component {
             label='City'
             placeholder='City'
           />
-
-          <CustomBtn content='Continue to Payment' type='submit' size='xl' />
-          {purchaseLoading && <SpinnerLine />}
+          <div className='ShippingDetails__container-continueBtn'>
+            <CustomBtn content={content} type='submit' size='xl' width='100' />
+            {purchaseLoading && <SpinnerLine />}
+          </div>
         </form>
       </div>
     );
@@ -157,14 +163,17 @@ const mapStateToProps = ({ user, cart, purchase }) => ({
   cartItems: cart.items,
   userDbId: user.currentUser?.userDbId,
   purchaseLoading: purchase.loading,
+  initialValues: user?.contactDetails,
 });
 
-export default reduxForm({
+const componentWithForm = reduxForm({
   form: 'shippingDetailsForm',
-})(
-  withRouter(
-    connect(mapStateToProps, { setAlert, updateContactDetails, createOrder })(
-      ShippingDetails
-    )
+  enableReinitialize: true,
+  destroyOnUnmount: false,
+})(ShippingDetails);
+
+export default withRouter(
+  connect(mapStateToProps, { setAlert, updateContactDetails, createOrder })(
+    componentWithForm
   )
 );

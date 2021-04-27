@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import SignInPage from './containers/SignInPage/SignInPage';
 import LandingPage from './containers/LandingPage/LandingPage';
 import CheckoutPage from './containers/CheckoutPage/CheckoutPage';
+import ProfilePage from './containers/ProfilePage/ProfilePage';
 import PurchaseHistory from './containers/PurchaseHistory/PurchaseHistory';
 import Alert from './components/Alert/Alert';
 import { subscribeUser } from './store/actions/user';
@@ -14,7 +15,6 @@ import { subscribeUser } from './store/actions/user';
 import './App.scss';
 
 class App extends Component {
-  targetElement = null;
   componentDidMount() {
     const { subscribeUser } = this.props;
     subscribeUser();
@@ -45,6 +45,7 @@ class App extends Component {
             />
             <Route exact path='/checkout' component={CheckoutPage} />
             <Route exact path='/orders' component={PurchaseHistory} />
+            <Route exact path='/profile' component={ProfilePage} />
           </Switch>
         </div>
       </Router>

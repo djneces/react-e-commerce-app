@@ -17,9 +17,9 @@ const email = (value) =>
     : undefined;
 
 class SignInForm extends Component {
-  onSubmit = async (formValues) => {
-    const { loginCurrentUser, history } = this.props;
-    loginCurrentUser(formValues, history);
+  onSubmit = (formValues) => {
+    const { loginCurrentUser, history, location } = this.props;
+    loginCurrentUser(formValues, history, location);
   };
 
   renderError = ({ error, touched }) => {
@@ -48,7 +48,13 @@ class SignInForm extends Component {
   };
 
   render() {
-    const { handleSubmit, isLoading, signInGoogle, isTouched } = this.props;
+    const {
+      handleSubmit,
+      isLoading,
+      signInGoogle,
+      isTouched,
+      formValues,
+    } = this.props;
 
     return (
       <div className='SignInForm'>
@@ -75,8 +81,12 @@ class SignInForm extends Component {
             component={this.renderInput}
             placeholder='Enter your password'
           />
-          <CustomBtn content='Login' type='submit' size='xl' />
-          {isLoading && isTouched && <Checkmark />}
+          <div className='SignInForm__loginBtn'>
+            <CustomBtn content='Login' size='xl' width='100' />
+            {isLoading && isTouched && formValues !== undefined && (
+              <Checkmark />
+            )}
+          </div>
         </form>
 
         <div className='SignInForm__socialBtn'>
@@ -94,6 +104,7 @@ class SignInForm extends Component {
 const mapStateToProps = ({ user, form }) => ({
   isLoading: user.isLoading,
   isTouched: form?.signInForm?.anyTouched,
+  formValues: form?.signInForm?.values,
 });
 
 export default reduxForm({

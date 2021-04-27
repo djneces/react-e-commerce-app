@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 
 import SummaryListItem from '../CheckoutSummary/SummaryListItem/SummaryListItem';
 import ShippingDetails from '../ShippingDetails/ShippingDetails';
+import SignInForm from '../SignInForm/SignInForm';
 import './CheckoutSummary.scss';
 
-const CheckoutSummary = ({ selectedItems }) => {
+const CheckoutSummary = ({ selectedItems, isAuthenticated, isLoading }) => {
   const totalPrice = selectedItems
     .map((cartItem) => {
       const { price, quantity } = cartItem;
@@ -43,15 +44,26 @@ const CheckoutSummary = ({ selectedItems }) => {
         </div>
       </div>
       <div className='ShippingForm'>
-        <h3>Shipping Details</h3>
-        <ShippingDetails />
+        {isAuthenticated && !isLoading ? (
+          <>
+            <h3>Shipping Details</h3>
+            <ShippingDetails content='Continue to Payment' />
+          </>
+        ) : (
+          <div className='ShippingForm__login'>
+            <h3 id='redOutline'>Please login first</h3>
+            <SignInForm />
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-const mapStateToProps = ({ cart }) => ({
+const mapStateToProps = ({ cart, user }) => ({
   selectedItems: cart.items,
+  isAuthenticated: user.isAuthenticated,
+  isLoading: user.isLoading,
 });
 
 export default connect(mapStateToProps)(CheckoutSummary);

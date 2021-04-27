@@ -63,6 +63,19 @@
         }
     }
 
+    &__loginBtn {
+        position: relative;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        svg {
+            position: absolute;
+            margin-left: 1rem;
+        }
+    }
+
     &__socialBtn {
         display: flex;
         justify-content: center;

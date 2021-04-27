@@ -44,7 +44,10 @@ const AccountDetails = ({
         <i className='fas fa-money-bill-wave'></i>
         Purchase History
       </div>
-      <div className='AccountDetails__profile'>
+      <div
+        onClick={() => history.push('/profile')}
+        className='AccountDetails__profile'
+      >
         <i className='far fa-user-circle'></i>
         Profile
       </div>
