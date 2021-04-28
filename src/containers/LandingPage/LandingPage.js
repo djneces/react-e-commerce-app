@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ListItem from '../../components/ListItem/ListItem';
 import DB from '../../assets/seedDB';
+
 import './LandingPage.scss';
 const { fruits } = DB;
 

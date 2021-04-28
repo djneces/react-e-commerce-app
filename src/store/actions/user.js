@@ -16,11 +16,13 @@ import {
   createUserProfileDocument,
   signInWithGoogle,
 } from '../../firebase/firebaseUtils.js';
-import { fetchOrderHistory } from '../actions/orderHistory';
+import { fetchFavorites } from '../../store/actions/favorites';
+import { fetchOrderHistory } from '../../store/actions/orderHistory';
 import { setAlert } from './alert';
 
 //SUBSCRIBE USER
 export const subscribeUser = () => async (dispatch) => {
+  //solving a bug when undefined
   if (dispatch === undefined) return;
   try {
     //subscription - Firebase checks for changes
@@ -48,11 +50,10 @@ export const subscribeUser = () => async (dispatch) => {
                 userDbId: userDbId,
               };
 
-              console.log('dispatch', dispatch);
-
               dispatch(setCurrentUser(user));
               dispatch(fetchOrderHistory(userDbId));
               dispatch(fetchContactDetails(userDbId));
+              dispatch(fetchFavorites(userDbId));
             }
           });
         }, 1000);

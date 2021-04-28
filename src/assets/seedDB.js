@@ -105,6 +105,88 @@ const DB = {
       description: '2.5kg (1 piece)',
     },
   ],
+  vegetables: [
+    {
+      product: 'cucumber',
+      url:
+        'https://images.unsplash.com/photo-1587411768638-ec71f8e33b78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 4.5,
+      discount: 0,
+      description: '1kg (5-7 pieces)',
+    },
+    {
+      product: 'tomato',
+      url:
+        'https://images.unsplash.com/flagged/photo-1579410137851-2f510f2d150f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80',
+      price: 3.5,
+      discount: 0,
+      description: '1kg (7-9 pieces)',
+    },
+    {
+      product: 'zucchini',
+      url:
+        'https://images.unsplash.com/photo-1583118208563-1654aa5caa31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3200&q=80',
+      price: 2.5,
+      discount: 0,
+      description: '300g (1 piece)',
+    },
+    {
+      product: 'red hot chilli pepper',
+      url:
+        'https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 5.0,
+      discount: 0,
+      description: '250g (4-4 pieces)',
+    },
+    {
+      product: 'onion',
+      url:
+        'https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 2.0,
+      discount: 0,
+      description: '1kg (8-10 pieces)',
+    },
+    {
+      product: 'garlic',
+      url:
+        'https://images.unsplash.com/photo-1587049693270-c7560da11218?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 6.0,
+      discount: 0,
+      description: '150g (3 pieces)',
+    },
+    {
+      product: 'green peas',
+      url:
+        'https://images.unsplash.com/photo-1587049585169-c526077ca3cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 8.0,
+      discount: 0,
+      description: '350g',
+    },
+    {
+      product: 'cherry tomato',
+      url:
+        'https://images.unsplash.com/photo-1587411768515-eeac0647deed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 2.5,
+      discount: 0,
+      description: '250g',
+    },
+    {
+      product: 'radish',
+      url:
+        'https://images.unsplash.com/photo-1587578855249-b6dbc62006d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
+      price: 3.5,
+      discount: 0,
+      description: '250g',
+    },
+    {
+      product: 'cabbage',
+      url:
+        'https://images.unsplash.com/photo-1583116935756-f66cd999cdbe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80',
+      price: 2.0,
+      discount: 0,
+      description: '1kg',
+    },
+  ],
 };
 
 export default DB;

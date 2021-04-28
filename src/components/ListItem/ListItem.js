@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import _ from 'lodash';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { addItemToCart } from '../../store/actions/shoppingCart';
 import CustomBtn from '../CustomBtn/CustomBtn';
+import FavoritesHeart from '../../components/FavoritesHeart/FavoritesHeart';
 import './ListItem.scss';
 
 const ListItem = ({
@@ -15,29 +17,19 @@ const ListItem = ({
   addItemToCart,
   isAuthenticated,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const toggleHover = () => {
-    setIsHovered(!isHovered);
-  };
+  const item = { id, product, description, price, url };
 
   const addItem = () => {
-    const item = { id, product, description, price, url };
     addItemToCart(item);
   };
+
   return (
     <div className='ListItem'>
       <div className='ListItem__cardHeader'>
         {discount !== 0 && (
           <div className='ListItem__cardHeader-discount'>{`${discount}% OFF`}</div>
         )}
-
-        <div className='ListItem__cardHeader-fav'>
-          <i
-            className={isHovered ? 'fas fa-heart' : 'far fa-heart'}
-            onMouseEnter={toggleHover}
-            onMouseLeave={toggleHover}
-          ></i>
-        </div>
+        {isAuthenticated && <FavoritesHeart product={product} item={item} />}
       </div>
       <div className='ListItem__cardBody'>
         <div className='ListItem__cardBody-image'>
@@ -70,4 +62,6 @@ const mapStateToProps = ({ user }) => ({
   isAuthenticated: user.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { addItemToCart })(ListItem);
+export default connect(mapStateToProps, {
+  addItemToCart,
+})(ListItem);

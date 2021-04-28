@@ -6,6 +6,7 @@ import { toggleAccountDetails } from '../../store/actions/accountDetails';
 import { clearAllPurchases } from '../../store/actions/purchase';
 import { clearAllCart } from '../../store/actions/shoppingCart';
 import { clearOrderHistory } from '../../store/actions/orderHistory';
+import { clearFavorites } from '../../store/actions/favorites';
 
 import './AccountDetails.scss';
 
@@ -16,6 +17,7 @@ const AccountDetails = ({
   history,
   clearAllPurchases,
   clearOrderHistory,
+  clearFavorites,
 }) => {
   const onSignOut = () => {
     logoutCurrentUser(history);
@@ -23,6 +25,7 @@ const AccountDetails = ({
     toggleAccountDetails();
     clearAllPurchases();
     clearOrderHistory();
+    clearFavorites();
   };
 
   const renderPurchaseHistory = () => {
@@ -66,5 +69,6 @@ export default withRouter(
     clearAllCart,
     clearAllPurchases,
     clearOrderHistory,
+    clearFavorites,
   })(AccountDetails)
 );

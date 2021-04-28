@@ -70,7 +70,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         contactDetails: null,
       };
-
     default:
       return state;
   }

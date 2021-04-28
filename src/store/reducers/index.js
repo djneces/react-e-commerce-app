@@ -8,13 +8,15 @@ import toggleMenu from './accountDetails';
 import shoppingCart from './shoppingCart';
 import purchase from './purchase';
 import orderHistory from './orderHistory';
+import favorites from './favorites';
 import { reducer as formReducer } from 'redux-form';
 
 const persistConfig = {
   key: 'root',
   storage,
   //reducers we need to persist
-  whitelist: ['cart', 'orderHistory', 'user', 'purchase'],
+  // whitelist: ['cart', 'orderHistory', 'user', 'purchase'],
+  whitelist: ['cart'],
 };
 const rootReducer = combineReducers({
   user: userReducer,
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   cart: shoppingCart,
   purchase: purchase,
   orderHistory: orderHistory,
+  favorites: favorites,
   form: formReducer,
 });
 
