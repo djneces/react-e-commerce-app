@@ -56,7 +56,7 @@ export const subscribeUser = () => async (dispatch) => {
               dispatch(fetchFavorites(userDbId));
             }
           });
-        }, 1000);
+        }, 2000);
       }
     });
   } catch (err) {

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import SearchBar from '../SearchBar/SearchBar';
@@ -18,6 +18,7 @@ const Header = ({
   itemsCount,
   toggleCartMenu,
   toggleCart,
+  location,
 }) => {
   const toggleDetails = () => {
     if (toggleCart) toggleCartMenu();
@@ -41,7 +42,7 @@ const Header = ({
           </div>
         </Link>
         <div className='Header__searchBar'>
-          <SearchBar />
+          {location.pathname === '/' && <SearchBar />}
         </div>
         <div className='Header__wrapper'>
           {currentUser ? (
@@ -91,7 +92,9 @@ const mapStateToProps = ({ user, toggleMenu, cart }) => ({
   toggleCart: cart.toggle,
 });
 
-export default connect(mapStateToProps, {
-  toggleAccountDetails,
-  toggleCartMenu,
-})(Header);
+export default withRouter(
+  connect(mapStateToProps, {
+    toggleAccountDetails,
+    toggleCartMenu,
+  })(Header)
+);

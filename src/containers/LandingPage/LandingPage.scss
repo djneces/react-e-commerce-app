@@ -2,10 +2,118 @@
 @import '../../assets/styles/utils';
 
 .LandingPage {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding: $margin-top-header 3rem 0;
+    padding: 5rem 0 3rem;
     background-color: $color-light;
-    grid-row-gap: 1.9rem;
-    grid-column-gap: 1.3rem;
+    flex: 1;
+
+    &__header {
+        img {
+            width: 100%;
+        }
+    }
+
+    &__body {
+        padding: 0 3rem;
+
+        &-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+
+            &--button {
+                #menuBtnFav {
+                    background-color: $color-orange;
+                    border-bottom-right-radius: 0;
+
+                    &:hover {
+                        background-color: lighten($color-orange, 10);
+                    }
+                }
+
+                #menuBtnDeals {
+                    background-color: $color-purple;
+                    border-top-left-radius: 0;
+
+                    &:hover {
+                        background-color: lighten($color-purple, 10);
+                    }
+                }
+
+            }
+
+            &--switchProduce {
+                display: flex;
+                align-items: center;
+                font-size: 2rem;
+
+                div {
+                    border: 1px solid $color-primary;
+                    color: $color-primary;
+                    padding: 0.5rem 1rem;
+                    cursor: pointer;
+                    box-shadow: $box-shadow-light;
+                    transition: border-color $transition-time ease-in-out, color $transition-time ease-in-out;
+
+                    &:first-of-type {
+                        border-radius: $border-radius-card 0 0 $border-radius-card;
+                    }
+
+                    &:last-of-type {
+                        border-radius: 0 $border-radius-card $border-radius-card 0;
+                    }
+
+                    &.active {
+                        background-color: $color-primary;
+                        color: #fff;
+                        border: none;
+                    }
+                }
+
+
+            }
+        }
+
+        &-sortPrice {
+            width: 12rem;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            span {
+                transition: transform 0.3s linear;
+
+                &:first-of-type {
+                    margin-left: 1rem;
+                }
+            }
+
+
+            i {
+                font-size: 1.8rem;
+                cursor: pointer;
+
+                &:hover {
+                    color: lighten($color-primary, 10);
+                }
+            }
+        }
+
+        &-ListItems {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 0.4fr));
+            grid-row-gap: 1.9rem;
+            grid-column-gap: 1.3rem;
+
+            &--noRecords {
+                width: 100%;
+                font-weight: bold;
+                position: absolute;
+                margin: 1rem auto;
+                text-align: center;
+            }
+        }
+    }
+
+
 }

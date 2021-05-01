@@ -30,6 +30,12 @@ const AccountDetails = ({
 
   const renderPurchaseHistory = () => {
     history.push('/orders');
+    toggleAccountDetails();
+  };
+
+  const renderProfile = () => {
+    history.push('/profile');
+    toggleAccountDetails();
   };
 
   const toggleDetails = () => {
@@ -47,10 +53,7 @@ const AccountDetails = ({
         <i className='fas fa-money-bill-wave'></i>
         Purchase History
       </div>
-      <div
-        onClick={() => history.push('/profile')}
-        className='AccountDetails__profile'
-      >
+      <div onClick={renderProfile} className='AccountDetails__profile'>
         <i className='far fa-user-circle'></i>
         Profile
       </div>

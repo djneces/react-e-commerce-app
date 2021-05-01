@@ -4,7 +4,7 @@
 .CheckoutPage {
     padding: $margin-top-header 3rem 2rem;
     background-color: $color-light;
-    min-height: 85vh;
+    min-height: auto;
     display: flex;
     justify-content: space-around;
 }

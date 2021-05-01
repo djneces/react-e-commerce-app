@@ -31,7 +31,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const newUser = {
       email: email,
-      username: displayName,
+      displayName: displayName,
       ...additionalData,
     };
 

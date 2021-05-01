@@ -1,4 +1,5 @@
 import axios from '../../axios-orders';
+
 import { setAlert } from '../../store/actions/alert';
 import { clearAllCart } from '../../store/actions/shoppingCart';
 import {
@@ -53,7 +54,7 @@ export const createOrder = (orderDetails, userId, history) => (dispatch) => {
             setAlert(
               'Purchase completed, thank you for shopping with us',
               'purchased',
-              5000
+              8000
             )
           );
           history.push('/');

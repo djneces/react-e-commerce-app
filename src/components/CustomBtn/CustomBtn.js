@@ -2,7 +2,7 @@ import React from 'react';
 import './CustomBtn.scss';
 
 const CustomBtn = (props) => {
-  const { content, onclick, size, type, width } = props;
+  const { content, onclick, size, type, width, id } = props;
   return (
     <button
       className={`CustomBtn ${size === 'xl' ? 'large' : ''} ${
@@ -10,6 +10,7 @@ const CustomBtn = (props) => {
       }`}
       onClick={onclick}
       type={type}
+      id={id}
     >
       {content}
     </button>

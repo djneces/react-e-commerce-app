@@ -47,7 +47,7 @@ const CheckoutSummary = ({ selectedItems, isAuthenticated, isLoading }) => {
         {isAuthenticated && !isLoading ? (
           <>
             <h3>Shipping Details</h3>
-            <ShippingDetails content='Continue to Payment' />
+            <ShippingDetails content='Complete Your Order' />
           </>
         ) : (
           <div className='ShippingForm__login'>

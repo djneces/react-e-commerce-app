@@ -111,7 +111,7 @@ const DB = {
       url:
         'https://images.unsplash.com/photo-1587411768638-ec71f8e33b78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
       price: 4.5,
-      discount: 0,
+      discount: 5,
       description: '1kg (5-7 pieces)',
     },
     {
@@ -135,7 +135,7 @@ const DB = {
       url:
         'https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
       price: 5.0,
-      discount: 0,
+      discount: 12,
       description: '250g (4-4 pieces)',
     },
     {
@@ -151,7 +151,7 @@ const DB = {
       url:
         'https://images.unsplash.com/photo-1587049693270-c7560da11218?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
       price: 6.0,
-      discount: 0,
+      discount: 10,
       description: '150g (3 pieces)',
     },
     {
@@ -175,7 +175,7 @@ const DB = {
       url:
         'https://images.unsplash.com/photo-1587578855249-b6dbc62006d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80',
       price: 3.5,
-      discount: 0,
+      discount: 5,
       description: '250g',
     },
     {

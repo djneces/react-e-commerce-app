@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import _ from 'lodash';
 import React, { useEffect } from 'react';
 import useState from 'react-usestateref';
@@ -31,6 +32,7 @@ const FavoritesHeart = ({
     if (!favoritesIsLoading && favoriteDbId?.length > 0) {
       setIsToggled(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoritesIsLoading, favoriteDbId]);
 
   // check if favorites are loaded and are not empty
@@ -42,7 +44,7 @@ const FavoritesHeart = ({
     // console.log(favoriteDbId);
   }
 
-  const addOrDeleteFavorite = (product, toggled, item) => {
+  const addOrDeleteFavorite = (toggled, item) => {
     if (toggled.current) {
       addToFavorites(userId, item);
     }
@@ -55,7 +57,7 @@ const FavoritesHeart = ({
     // //toggle the icon only when authenticated
     if (isAuthenticated) {
       setIsToggled(() => !isToggled);
-      addOrDeleteFavorite(product, refToggled, item);
+      addOrDeleteFavorite(refToggled, item);
     }
   };
 

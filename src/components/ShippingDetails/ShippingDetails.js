@@ -36,7 +36,7 @@ class ShippingDetails extends Component {
     const userData = { ...currentUser, contactDetails: formValues };
     updateContactDetails(userData, userDbId, location);
 
-    //sends order to the DB only from /checkout (form is use in ProfilePage to update contact details too)
+    //sends order to the DB only from /checkout (form is used in ProfilePage to update contact details too)
     if (location.pathname === '/checkout') {
       const orderData = { orderItems: cartItems, createdAt: new Date() };
       createOrder(orderData, userDbId, history);

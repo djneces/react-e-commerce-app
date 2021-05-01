@@ -1,0 +1,11 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/utils';
+
+.Footer {
+    height: 40px;
+    background-color: #90BF57;
+    text-align: center;
+    color: #fff;
+    display: grid;
+    place-items: center;
+}

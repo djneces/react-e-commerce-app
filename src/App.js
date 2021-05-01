@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Header from './components/Header/Header';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import { connect } from 'react-redux';
 
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import SignInPage from './containers/SignInPage/SignInPage';
 import LandingPage from './containers/LandingPage/LandingPage';
 import CheckoutPage from './containers/CheckoutPage/CheckoutPage';
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path='/orders' component={PurchaseHistory} />
             <Route exact path='/profile' component={ProfilePage} />
           </Switch>
+          <Footer />
         </div>
       </Router>
     );
