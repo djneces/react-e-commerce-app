@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "body-scroll-lock": "^3.1.5",
-    "config": "^3.3.6",
     "firebase": "^8.4.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -29,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && echo '/* /index.html 200' > ./build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

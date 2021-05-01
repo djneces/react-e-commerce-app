@@ -3,7 +3,9 @@
 
 .SignInPage {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: $margin-top-header 3rem 0;
     background-color: $color-light;
+    max-width: 1200px;
+    width: 85vw;
 }

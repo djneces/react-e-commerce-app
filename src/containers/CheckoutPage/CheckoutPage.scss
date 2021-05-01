@@ -2,6 +2,8 @@
 @import '../../assets/styles/utils';
 
 .CheckoutPage {
+    max-width: 1200px;
+    width: 85vw;
     padding: $margin-top-header 3rem 2rem;
     background-color: $color-light;
     min-height: auto;

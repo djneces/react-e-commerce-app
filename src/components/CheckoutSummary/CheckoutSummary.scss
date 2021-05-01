@@ -37,6 +37,8 @@
 
 .ShippingForm {
     width: 40vw;
+    max-width: 500px;
+    margin-left: 5rem;
 
     &__login {
         #redOutline {

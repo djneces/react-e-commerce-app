@@ -8,6 +8,7 @@ body {
     color: $color-primary;
     height: 100vh;
     position: relative;
+    background-color: $color-light;
 
     a {
         text-decoration: none;
@@ -19,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     min-height: 100vh;
 }
 
