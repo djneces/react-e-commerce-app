@@ -104,6 +104,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
             grid-row-gap: 1.9rem;
             grid-column-gap: 1.3rem;
+            justify-content: center;
 
             &--noRecords {
                 width: 100%;
