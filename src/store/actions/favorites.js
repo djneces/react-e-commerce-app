@@ -32,6 +32,7 @@ export const addToFavorites = (userId, itemToAdd) => async (dispatch) => {
       dispatch({
         type: ADD_TO_FAVORITES,
       });
+      // dispatch(fetchFavorites());
     })
     .catch((err) => {
       console.error(err);
@@ -62,9 +63,8 @@ export const clearFavorites = () => {
   };
 };
 
-//FETCH ALL ORDERS
+//FETCH ALL Favorites
 export const fetchFavorites = (userId) => async (dispatch) => {
-  if (!userId) return;
   try {
     dispatch(fetchFavoritesStart());
     const query = database

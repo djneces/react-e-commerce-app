@@ -54,7 +54,7 @@ export const createOrder = (orderDetails, userId, history) => (dispatch) => {
             setAlert(
               'Purchase completed, thank you for shopping with us',
               'purchased',
-              8000
+              5000
             )
           );
           history.push('/');
