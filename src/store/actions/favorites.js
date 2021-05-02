@@ -64,6 +64,7 @@ export const clearFavorites = () => {
 
 //FETCH ALL ORDERS
 export const fetchFavorites = (userId) => async (dispatch) => {
+  if (!userId) return;
   try {
     dispatch(fetchFavoritesStart());
     const query = database
@@ -77,7 +78,6 @@ export const fetchFavorites = (userId) => async (dispatch) => {
             return;
           }
           const fetchedFavorites = userSnapshot.val()?.favorites;
-          //   console.log(fetchedFavorites);
           dispatch({
             type: FETCH_FAVORITES_SUCCESS,
             payload: fetchedFavorites,

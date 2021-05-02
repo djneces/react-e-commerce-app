@@ -9,7 +9,7 @@ import heroImg from '../../assets/images/hero-img.jpg';
 
 import './LandingPage.scss';
 
-const LandingPage = ({ isAuthenticated, favorites }) => {
+const LandingPage = ({ isAuthenticated, favorites, isFavoritesLoading }) => {
   const [sortByPriceDown, setSortByPriceDown] = useState(false);
   const [sortByPriceUp, setSortByPriceUp] = useState(false);
   const [favoritesToggled, setFavoritesToggled] = useState(false);
@@ -56,15 +56,18 @@ const LandingPage = ({ isAuthenticated, favorites }) => {
       <div className='LandingPage__body'>
         <div className='LandingPage__body-controls'>
           <div className='LandingPage__body-controls--button'>
-            {!dealsToggled && isAuthenticated && !_.isEmpty(favorites) && (
-              <CustomBtn
-                onclick={sortByFavorites}
-                content={
-                  favoritesToggled ? 'Go Back to Menu' : 'Your favorites'
-                }
-                id={'menuBtnFav'}
-              />
-            )}
+            {!dealsToggled &&
+              isAuthenticated &&
+              !_.isEmpty(favorites) &&
+              !isFavoritesLoading && (
+                <CustomBtn
+                  onclick={sortByFavorites}
+                  content={
+                    favoritesToggled ? 'Go Back to Menu' : 'Your favorites'
+                  }
+                  id={'menuBtnFav'}
+                />
+              )}
 
             {defaultView && !favoritesToggled && (
               <>
@@ -137,6 +140,7 @@ const LandingPage = ({ isAuthenticated, favorites }) => {
 const mapStateToProps = ({ user, favorites }) => ({
   isAuthenticated: user.isAuthenticated,
   favorites: favorites?.favorites,
+  isFavoritesLoading: favorites.loading,
 });
 
 export default connect(mapStateToProps)(LandingPage);

@@ -48,7 +48,7 @@ const FavoritesView = ({ favorites, favoritesIsLoading, userIsLoading }) => {
         );
       });
     }
-    return favoritesRender;
+    return favoritesRender ? favoritesRender : null;
   };
   return filterFavorites();
 };
