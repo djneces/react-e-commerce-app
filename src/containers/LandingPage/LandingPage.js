@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import DefaultView from './DefaultView/DefaultView';
 import FavoritesView from './FavoritesView/FavoritesView';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
@@ -7,7 +9,7 @@ import heroImg from '../../assets/images/hero-img.jpg';
 
 import './LandingPage.scss';
 
-const LandingPage = () => {
+const LandingPage = ({ isAuthenticated, favorites }) => {
   const [sortByPriceDown, setSortByPriceDown] = useState(false);
   const [sortByPriceUp, setSortByPriceUp] = useState(false);
   const [favoritesToggled, setFavoritesToggled] = useState(false);
@@ -54,7 +56,7 @@ const LandingPage = () => {
       <div className='LandingPage__body'>
         <div className='LandingPage__body-controls'>
           <div className='LandingPage__body-controls--button'>
-            {!dealsToggled && (
+            {!dealsToggled && isAuthenticated && !_.isEmpty(favorites) && (
               <CustomBtn
                 onclick={sortByFavorites}
                 content={
@@ -132,4 +134,9 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+const mapStateToProps = ({ user, favorites }) => ({
+  isAuthenticated: user.isAuthenticated,
+  favorites: favorites?.favorites,
+});
+
+export default connect(mapStateToProps)(LandingPage);
