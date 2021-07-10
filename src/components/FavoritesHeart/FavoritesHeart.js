@@ -65,11 +65,14 @@ const FavoritesHeart = ({
   const iconClass =
     favoriteDbId?.length > 0
       ? 'fas fa-heart red'
-      : refHovered.current
+      : refHovered.current && window.innerWidth > 1100
       ? 'fas fa-heart red'
       : refToggled.current && isAuthenticated
       ? 'fas fa-heart red'
-      : refToggled.current && refHovered.current && isAuthenticated
+      : refToggled.current &&
+        refHovered.current &&
+        isAuthenticated &&
+        window.innerWidth > 1100
       ? 'fas fa-heart red'
       : 'far fa-heart';
   return (
