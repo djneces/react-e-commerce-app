@@ -34,7 +34,7 @@
             margin: 0 0 1rem;
         }
 
-        &:last-child {
+        &:last-child:not(:first-child) {
             margin: 1rem 0 0;
         }
     }

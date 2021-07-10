@@ -40,21 +40,20 @@ export const addToFavorites = (userId, itemToAdd) => async (dispatch) => {
 };
 //REMOVE FROM FAVORITES
 //userId (Real time DB id), itemToRemove (object, Real time DB id)
-export const removeFromFavorites = (userId, itemToRemove) => async (
-  dispatch
-) => {
-  await axios
-    .delete(`/users/${userId}/favorites/${itemToRemove}.json`)
-    .then(() => {
-      dispatch({
-        type: REMOVE_FROM_FAVORITES,
-        payload: itemToRemove,
+export const removeFromFavorites =
+  (userId, itemToRemove) => async (dispatch) => {
+    await axios
+      .delete(`/users/${userId}/favorites/${itemToRemove}.json`)
+      .then(() => {
+        dispatch({
+          type: REMOVE_FROM_FAVORITES,
+          payload: itemToRemove,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
       });
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
+  };
 
 //CLEAR FAVORITES
 export const clearFavorites = () => {

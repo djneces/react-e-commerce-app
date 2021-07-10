@@ -99,7 +99,7 @@ const LandingPage = ({ isAuthenticated, favorites, isFavoritesLoading }) => {
           </div>
           {defaultView && !favoritesToggled && !dealsToggled && (
             <div className='LandingPage__body-sortPrice'>
-              Sort by Price
+              <span> Sort by Price</span>
               <span>
                 <i
                   className='far fa-arrow-alt-circle-up'

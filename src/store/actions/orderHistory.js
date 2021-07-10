@@ -39,6 +39,12 @@ export const fetchOrderHistory = (userId) => async (dispatch) => {
       .orderByChild('userDbId')
       .equalTo(userId);
     query.on('value', function (snapshot) {
+      // If not data
+      if (!snapshot.hasChildren()) {
+        dispatch(fetchOrdersFail('No records found'));
+        return;
+      }
+      // Otherwise fetch the data if any
       snapshot.forEach(function (userSnapshot) {
         if (userSnapshot) {
           if (userSnapshot.val().orders === undefined) {
